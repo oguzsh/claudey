@@ -1,7 +1,5 @@
 # Plugins and Marketplaces
 
-Plugins extend Claude Code with new tools and capabilities. This guide covers installation only - see the [full article](https://x.com/affaanmustafa/status/2012378465664745795) for when and why to use them.
-
 ---
 
 ## Marketplaces
@@ -15,16 +13,18 @@ Marketplaces are repositories of installable plugins.
 claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
 
 # Add community marketplaces
-claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
+claude plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
 ```
 
 ### Recommended Marketplaces
 
-| Marketplace | Source |
-|-------------|--------|
-| claude-plugins-official | `anthropics/claude-plugins-official` |
-| claude-code-plugins | `anthropics/claude-code` |
-| Mixedbread-Grep | `mixedbread-ai/mgrep` |
+| Marketplace                  | Source                               |
+| ---------------------------- | ------------------------------------ |
+| claude-plugins-official      | `anthropics/claude-plugins-official` |
+| claude-code-plugins          | `anthropics/claude-code`             |
+| Mixedbread-Grep              | `mixedbread-ai/mgrep`                |
+| obra/superpowers-marketplace | `obra/superpowers-marketplace`       |
+| compound-engineering-plugin  | `compound-engineering-plugin`        |
 
 ---
 
@@ -41,24 +41,30 @@ claude plugin install typescript-lsp@claude-plugins-official
 ### Recommended Plugins
 
 **Development:**
+
 - `typescript-lsp` - TypeScript intelligence
 - `pyright-lsp` - Python type checking
 - `hookify` - Create hooks conversationally
 - `code-simplifier` - Refactor code
 
 **Code Quality:**
+
 - `code-review` - Code review
 - `pr-review-toolkit` - PR automation
 - `security-guidance` - Security checks
 
 **Search:**
+
 - `mgrep` - Enhanced search (better than ripgrep)
 - `context7` - Live documentation lookup
 
 **Workflow:**
+
 - `commit-commands` - Git workflow
 - `frontend-design` - UI patterns
 - `feature-dev` - Feature development
+- `superpowers-plugin` - Superpowers plugin
+- `compound-engineering-plugin` - Compound engineering plugin
 
 ---
 
@@ -68,6 +74,8 @@ claude plugin install typescript-lsp@claude-plugins-official
 # Add marketplaces
 claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
 claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
+claude plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
+claude plugin marketplace add obra/superpowers-marketplace
 
 # Open /plugins and install what you need
 ```

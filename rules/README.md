@@ -16,8 +16,7 @@ rules/
 │   ├── agents.md
 │   └── security.md
 ├── typescript/      # TypeScript/JavaScript specific
-├── python/          # Python specific
-└── golang/          # Go specific
+└── python/          # Python specific
 ```
 
 - **common/** contains universal principles — no language-specific code examples.
@@ -31,7 +30,6 @@ rules/
 # Install common + one or more language-specific rule sets
 ./install.sh typescript
 ./install.sh python
-./install.sh golang
 
 # Install multiple languages at once
 ./install.sh typescript python
@@ -52,7 +50,6 @@ cp -r rules/common ~/.claude/rules/common
 # Install language-specific rules based on your project's tech stack
 cp -r rules/typescript ~/.claude/rules/typescript
 cp -r rules/python ~/.claude/rules/python
-cp -r rules/golang ~/.claude/rules/golang
 
 # Attention ! ! ! Configure according to your actual project requirements; the configuration here is for reference only.
 ```
@@ -60,9 +57,9 @@ cp -r rules/golang ~/.claude/rules/golang
 ## Rules vs Skills
 
 - **Rules** define standards, conventions, and checklists that apply broadly (e.g., "80% test coverage", "no hardcoded secrets").
-- **Skills** (`skills/` directory) provide deep, actionable reference material for specific tasks (e.g., `python-patterns`, `golang-testing`).
+- **Skills** (`skills/` directory) provide deep, actionable reference material for specific tasks (e.g., `python-patterns`).
 
-Language-specific rule files reference relevant skills where appropriate. Rules tell you *what* to do; skills tell you *how* to do it.
+Language-specific rule files reference relevant skills where appropriate. Rules tell you _what_ to do; skills tell you _how_ to do it.
 
 ## Adding a New Language
 

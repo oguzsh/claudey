@@ -1,44 +1,42 @@
 {
-  "name": "everything-claude-code",
-  "owner": {
-    "name": "Affaan Mustafa",
-    "email": "affaan@example.com"
-  },
-  "metadata": {
-    "description": "Battle-tested Claude Code configurations from an Anthropic hackathon winner"
-  },
-  "plugins": [
-    {
-      "name": "everything-claude-code",
-      "source": "./",
-      "description": "Complete collection of agents, skills, hooks, commands, and rules evolved over 10+ months of intensive daily use",
-      "author": {
-        "name": "Affaan Mustafa"
-      },
-      "homepage": "https://github.com/affaan-m/everything-claude-code",
-      "repository": "https://github.com/affaan-m/everything-claude-code",
-      "license": "MIT",
-      "keywords": [
-        "agents",
-        "skills",
-        "hooks",
-        "commands",
-        "tdd",
-        "code-review",
-        "security",
-        "best-practices"
-      ],
-      "category": "workflow",
-      "tags": [
-        "agents",
-        "skills",
-        "hooks",
-        "commands",
-        "tdd",
-        "code-review",
-        "security",
-        "best-practices"
-      ]
-    }
-  ]
+	"name": "claudey",
+	"owner": {
+		"name": "Oguzhan Ince",
+		"email": "oguzhan824@gmail.com"
+	},
+	"metadata": {
+		"description": "Custom Claude Code configuration w/@affaan-m"
+	},
+	"plugins": [
+		{
+			"name": "claudey",
+			"source": "./",
+			"description": "Complete collection of agents, skills, hooks, commands, and rules",
+			"author": {
+				"name": "Oguzhan Ince"
+			},
+			"homepage": "https://github.com/oguzsh/claudey",
+			"repository": "https://github.com/oguzsh/claudey",
+			"license": "MIT",
+			"keywords": [
+				"agents",
+				"skills",
+				"hooks",
+				"commands",
+				"tdd",
+				"code-review",
+				"security"
+			],
+			"category": "workflow",
+			"tags": [
+				"agents",
+				"skills",
+				"hooks",
+				"commands",
+				"tdd",
+				"code-review",
+				"security"
+			]
+		}
+	]
 }
