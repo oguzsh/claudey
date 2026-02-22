@@ -259,3 +259,4 @@ After user approves, **manually** execute:
 3. **Trust Rules** – Backend follows Codex, Frontend follows Gemini
 4. External models have **zero filesystem write access**
 5. **SESSION_ID Handoff** – Plan must include `CODEX_SESSION` / `GEMINI_SESSION` at end (for `/ccg:execute resume <SESSION_ID>` use)
+

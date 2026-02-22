@@ -30,16 +30,17 @@ jobs:
           go-version: "1.22"
 
       - name: Validate agents
-        run: go run ./scripts/claudey-hooks validate-agents
+        run: go run ./scripts/claudey validate-agents
 
       - name: Validate hooks
-        run: go run ./scripts/claudey-hooks validate-hooks
+        run: go run ./scripts/claudey validate-hooks
 
       - name: Validate commands
-        run: go run ./scripts/claudey-hooks validate-commands
+        run: go run ./scripts/claudey validate-commands
 
       - name: Validate skills
-        run: go run ./scripts/claudey-hooks validate-skills
+        run: go run ./scripts/claudey validate-skills
 
       - name: Validate rules
-        run: go run ./scripts/claudey-hooks validate-rules
+        run: go run ./scripts/claudey validate-rules
+

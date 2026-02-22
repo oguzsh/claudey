@@ -84,3 +84,4 @@ Observer: Running (last analysis: 5 min ago)
 - `--high-confidence`: Show only instincts with confidence >= 0.7
 - `--source <type>`: Filter by source (session-observation, repo-analysis, inherited)
 - `--json`: Output as JSON for programmatic use
+

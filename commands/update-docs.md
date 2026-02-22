@@ -82,3 +82,4 @@ Skipped:  docs/API.md (no changes detected)
 - **Preserve manual sections**: Only update generated sections; leave hand-written prose intact
 - **Mark generated content**: Use `<!-- AUTO-GENERATED -->` markers around generated sections
 - **Don't create docs unprompted**: Only create new doc files if the command explicitly requests it
+

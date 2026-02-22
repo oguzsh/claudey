@@ -58,3 +58,4 @@ Follow the formats in CONTRIBUTING.md:
 - Hooks: JSON with matcher and hooks array
 
 File naming: lowercase with hyphens (e.g., `python-reviewer.md`, `tdd-workflow.md`)
+

@@ -91,3 +91,4 @@ claude plugin marketplace add obra/superpowers-marketplace
 |-- known_marketplaces.json   # Added marketplaces
 |-- marketplaces/             # Marketplace data
 ```
+

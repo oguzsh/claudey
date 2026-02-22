@@ -180,3 +180,4 @@ def process(text: str, config: Config, tracker: CostTracker) -> tuple[Result, Co
 - Batch processing pipelines where cost adds up quickly
 - Multi-model architectures that need intelligent routing
 - Production systems that need budget guardrails
+

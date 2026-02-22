@@ -1,11 +1,10 @@
 #!/bin/bash
 set -e
 
-echo "Running validators..."
-go run ./scripts/claudey-hooks validate-agents
-go run ./scripts/claudey-hooks validate-commands
-go run ./scripts/claudey-hooks validate-rules
-go run ./scripts/claudey-hooks validate-skills
-go run ./scripts/claudey-hooks validate-hooks
-
+echo "Running validations..."
+go run ./scripts/claudey validate-agents
+go run ./scripts/claudey validate-commands
+go run ./scripts/claudey validate-rules
+go run ./scripts/claudey validate-skills
+go run ./scripts/claudey validate-hooks
 echo "All validations passed!"

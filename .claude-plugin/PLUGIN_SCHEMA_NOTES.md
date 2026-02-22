@@ -218,3 +218,4 @@ Documenting validator quirks here:
 * Preserves plugin stability as the ecosystem evolves
 
 If the validator changes, update this document first.
+

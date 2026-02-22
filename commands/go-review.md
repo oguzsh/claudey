@@ -146,3 +146,4 @@ Recommendation: ❌ Block merge until CRITICAL issue is fixed
 
 - Agent: `agents/go-reviewer.md`
 - Skills: `skills/golang-patterns/`, `skills/golang-testing/`
+

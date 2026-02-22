@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "Building claudey-hooks binary..."
-go build -o hooks/bin/claudey-hooks ./scripts/claudey-hooks
+echo "Building claudey binary..."
+go build -o bin/claudey ./scripts/claudey
 
-echo "Running linter..."
-./bin/lint.sh

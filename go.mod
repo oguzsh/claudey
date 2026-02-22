@@ -1,4 +1,3 @@
-module github.com/oguzsh/everything-claude-code
+module github.com/oguzsh/claudey
 
 go 1.22
-

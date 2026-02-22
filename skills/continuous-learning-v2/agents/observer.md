@@ -135,3 +135,4 @@ When instincts are imported from Skill Creator (repo analysis), they have:
 - `source_repo: "https://github.com/..."`
 
 These should be treated as team/project conventions with higher initial confidence (0.7+).
+

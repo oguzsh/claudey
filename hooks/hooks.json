@@ -7,7 +7,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" block-dev-server"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" block-dev-server"
 					}
 				],
 				"description": "Block dev servers outside tmux - ensures you can access logs"
@@ -17,7 +17,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" tmux-reminder"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" tmux-reminder"
 					}
 				],
 				"description": "Reminder to use tmux for long-running commands"
@@ -27,7 +27,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" git-push-reminder"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" git-push-reminder"
 					}
 				],
 				"description": "Reminder before git push to review changes"
@@ -37,7 +37,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" block-random-docs"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" block-random-docs"
 					}
 				],
 				"description": "Block creation of random .md files - keeps docs consolidated"
@@ -47,7 +47,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" suggest-compact"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" suggest-compact"
 					}
 				],
 				"description": "Suggest manual compaction at logical intervals"
@@ -59,7 +59,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" pre-compact"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" pre-compact"
 					}
 				],
 				"description": "Save state before context compaction"
@@ -71,7 +71,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" session-start"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" session-start"
 					}
 				],
 				"description": "Load previous context and detect package manager on new session"
@@ -83,7 +83,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" pr-created-log"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" pr-created-log"
 					}
 				],
 				"description": "Log PR URL and provide review command after PR creation"
@@ -93,7 +93,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" build-analysis",
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" build-analysis",
 						"async": true,
 						"timeout": 30
 					}
@@ -105,7 +105,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" post-edit-format"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" post-edit-format"
 					}
 				],
 				"description": "Auto-format JS/TS files with Prettier after edits"
@@ -115,7 +115,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" post-edit-typecheck"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" post-edit-typecheck"
 					}
 				],
 				"description": "TypeScript check after editing .ts/.tsx files"
@@ -125,7 +125,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" post-edit-console-warn"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" post-edit-console-warn"
 					}
 				],
 				"description": "Warn about console.log statements after edits"
@@ -137,7 +137,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" check-console-log"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" check-console-log"
 					}
 				],
 				"description": "Check for console.log in modified files after each response"
@@ -149,7 +149,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" session-end"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" session-end"
 					}
 				],
 				"description": "Persist session state on end"
@@ -159,7 +159,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/bin/claudey-hooks\" evaluate-session"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" evaluate-session"
 					}
 				],
 				"description": "Evaluate session for extractable patterns"
@@ -167,3 +167,4 @@
 		]
 	}
 }
+

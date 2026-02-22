@@ -52,3 +52,4 @@ fi
 if [ "$count" -gt "$THRESHOLD" ] && [ $((count % 25)) -eq 0 ]; then
   echo "[StrategicCompact] $count tool calls - good checkpoint for /compact if context is stale" >&2
 fi
+

@@ -36,3 +36,4 @@ def test_database_connection():
 ## Reference
 
 See skill: `python-testing` for detailed pytest patterns and fixtures.
+

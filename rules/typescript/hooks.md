@@ -20,3 +20,4 @@ Configure in `~/.claude/settings.json`:
 ## Stop Hooks
 
 - **console.log audit**: Check all modified files for `console.log` before session ends
+

@@ -290,3 +290,4 @@ v2 is fully compatible with v1:
 ---
 
 *Instinct-based learning: teaching Claude your patterns, one observation at a time.*
+

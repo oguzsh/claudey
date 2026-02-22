@@ -170,3 +170,4 @@ if [[ "$TARGET" == "cursor" ]]; then
 
     echo "Done. Cursor configs installed to $DEST_DIR/"
 fi
+

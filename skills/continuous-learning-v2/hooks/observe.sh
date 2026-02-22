@@ -155,3 +155,4 @@ if [ -f "$OBSERVER_PID_FILE" ]; then
 fi
 
 exit 0
+

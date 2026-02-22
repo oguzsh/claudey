@@ -57,3 +57,4 @@ jobs:
             ## Changes
             ${{ steps.changelog.outputs.commits }}
           generate_release_notes: ${{ inputs.generate-notes }}
+

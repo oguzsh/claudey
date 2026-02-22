@@ -43,3 +43,4 @@ When creating PRs:
 4. **Commit & Push**
    - Detailed commit messages
    - Follow conventional commits format
+

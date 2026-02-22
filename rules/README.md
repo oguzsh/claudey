@@ -77,3 +77,4 @@ To add support for a new language (e.g., `rust/`):
    > This file extends [common/xxx.md](../common/xxx.md) with <Language> specific content.
    ```
 4. Reference existing skills if available, or create new ones under `skills/`.
+

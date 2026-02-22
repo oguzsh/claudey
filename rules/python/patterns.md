@@ -37,3 +37,4 @@ class CreateUserRequest:
 ## Reference
 
 See skill: `python-patterns` for comprehensive patterns including decorators, concurrency, and package organization.
+

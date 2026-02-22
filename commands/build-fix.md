@@ -60,3 +60,4 @@ Show results:
 | Build tool misconfiguration | Read config file; compare with working defaults |
 
 Fix one error at a time for safety. Prefer minimal diffs over refactoring.
+

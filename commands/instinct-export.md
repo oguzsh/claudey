@@ -89,3 +89,4 @@ Exports do NOT include:
 - `--output <file>`: Output file path (default: instincts-export-YYYYMMDD.yaml)
 - `--format <yaml|json|md>`: Output format (default: yaml)
 - `--include-evidence`: Include evidence text (default: excluded)
+

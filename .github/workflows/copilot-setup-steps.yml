@@ -16,3 +16,4 @@ steps:
       cache-dependency-path: # optional
       # Target architecture for Go to use. Examples: x86, x64. Will use system architecture by default.
       architecture: # optional
+

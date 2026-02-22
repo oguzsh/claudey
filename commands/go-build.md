@@ -181,3 +181,4 @@ The agent will stop and report if:
 
 - Agent: `agents/go-build-resolver.md`
 - Skill: `skills/golang-patterns/`
+

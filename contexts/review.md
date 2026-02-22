@@ -20,3 +20,4 @@ Focus: Quality, security, maintainability
 
 ## Output Format
 Group findings by file, severity first
+

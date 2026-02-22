@@ -361,3 +361,4 @@ npx playwright codegen http://localhost:3000
 # View report
 npx playwright show-report
 ```
+

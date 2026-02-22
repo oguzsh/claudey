@@ -21,3 +21,4 @@
   "required": ["packageManager"],
   "additionalProperties": false
 }
+

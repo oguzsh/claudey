@@ -17,3 +17,4 @@ Configure in `~/.claude/settings.json`:
 ## Warnings
 
 - Warn about `print()` statements in edited files (use `logging` module instead)
+

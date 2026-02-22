@@ -72,3 +72,4 @@ $ARGUMENTS:
 - `verify <name>` - Verify against named checkpoint
 - `list` - Show all checkpoints
 - `clear` - Remove old checkpoints (keeps last 5)
+

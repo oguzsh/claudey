@@ -156,3 +156,4 @@ Integrate review feedback, execute optimization after user confirmation.
 2. **Codex frontend opinions for reference only**
 3. External models have **zero filesystem write access**
 4. Claude handles all code writes and file operations
+
