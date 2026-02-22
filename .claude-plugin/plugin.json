@@ -15,8 +15,6 @@
 		"./agents/code-reviewer.md",
 		"./agents/database-reviewer.md",
 		"./agents/doc-updater.md",
-		"./agents/go-build-resolver.md",
-		"./agents/go-reviewer.md",
 		"./agents/planner.md",
 		"./agents/python-reviewer.md",
 		"./agents/refactor-cleaner.md",
@@ -24,4 +22,3 @@
 		"./agents/tdd-guide.md"
 	]
 }
-

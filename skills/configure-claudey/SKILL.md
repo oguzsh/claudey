@@ -145,7 +145,6 @@ cp -r $CLAUDEY_ROOT/rules/common/* $TARGET/rules/
 # Language-specific rules (flat copy into rules/)
 cp -r $CLAUDEY_ROOT/rules/typescript/* $TARGET/rules/   # if selected
 cp -r $CLAUDEY_ROOT/rules/python/* $TARGET/rules/        # if selected
-cp -r $CLAUDEY_ROOT/rules/golang/* $TARGET/rules/        # if selected
 ```
 
 **Important**: If the user selects any language-specific rules but NOT common rules, warn them:
