@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/sysutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/sysutil"
 )
 
 var tsExtRe = regexp.MustCompile(`\.(ts|tsx)$`)
@@ -82,4 +82,3 @@ func fileExists(path string) bool {
 	_, err := os.Stat(path)
 	return err == nil
 }
-

@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 // EvaluateSession evaluates a session for extractable patterns.
@@ -65,4 +65,3 @@ func EvaluateSession(input map[string]any, pluginRoot string) {
 	hookio.Logf("[ContinuousLearning] Session has %d messages - evaluate for extractable patterns", messageCount)
 	hookio.Logf("[ContinuousLearning] Save learned skills to: %s", learnedSkillsPath)
 }
-

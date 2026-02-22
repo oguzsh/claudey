@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"regexp"
 
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/sysutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/sysutil"
 )
 
 var jstsFormatRe = regexp.MustCompile(`\.(ts|tsx|js|jsx)$`)
@@ -27,4 +27,3 @@ func PostEditFormat(input map[string]any, raw []byte) {
 
 	hookio.Passthrough(raw)
 }
-

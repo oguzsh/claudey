@@ -3,10 +3,10 @@ package hooks
 import (
 	"path/filepath"
 
-	"github.com/oguzsh/everything-claude-code/internal/datetime"
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/datetime"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 // PreCompact saves state before context compaction.
@@ -28,4 +28,3 @@ func PreCompact() {
 
 	hookio.Log("[PreCompact] State saved before compaction")
 }
-

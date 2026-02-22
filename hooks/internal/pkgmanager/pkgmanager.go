@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
-	"github.com/oguzsh/everything-claude-code/internal/sysutil"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/platform"
+	"github.com/oguzsh/claudey/internal/sysutil"
 )
 
 // Config holds the commands for a package manager.
@@ -303,4 +303,3 @@ func CommandPattern(action string) string {
 
 	return "(" + strings.Join(patterns, "|") + ")"
 }
-

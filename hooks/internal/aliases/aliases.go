@@ -12,9 +12,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 const aliasVersion = "1.0"
@@ -402,4 +402,3 @@ func Cleanup(sessionExists func(string) bool) (checked, removed int) {
 
 	return checked, len(toRemove)
 }
-

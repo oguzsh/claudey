@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/hooks"
-	"github.com/oguzsh/everything-claude-code/internal/validators"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/hooks"
+	"github.com/oguzsh/claudey/internal/validators"
 )
 
 func main() {
@@ -203,4 +203,3 @@ func findPluginRoot() string {
 
 	return cwd
 }
-

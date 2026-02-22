@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 // SuggestCompact suggests manual compaction at logical intervals.
@@ -53,4 +53,3 @@ func SuggestCompact() {
 		hookio.Logf("[StrategicCompact] %d tool calls - good checkpoint for /compact if context is stale", count)
 	}
 }
-

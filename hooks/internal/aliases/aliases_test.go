@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 func setupTestHome(t *testing.T) {
@@ -178,4 +178,3 @@ func TestCleanup(t *testing.T) {
 func init() {
 	_ = platform.ClaudeDir
 }
-

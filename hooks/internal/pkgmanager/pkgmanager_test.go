@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/fileutil"
 )
 
 func TestDetectFromLockFile(t *testing.T) {
@@ -141,4 +141,3 @@ func searchStr(s, substr string) bool {
 	}
 	return false
 }
-

@@ -4,9 +4,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/gitutil"
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/gitutil"
+	"github.com/oguzsh/claudey/internal/hookio"
 )
 
 var excludedPatterns = []*regexp.Regexp{
@@ -60,4 +60,3 @@ func CheckConsoleLog(raw []byte) {
 
 	hookio.Passthrough(raw)
 }
-

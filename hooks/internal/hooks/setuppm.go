@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/oguzsh/everything-claude-code/internal/pkgmanager"
+	"github.com/oguzsh/claudey/internal/pkgmanager"
 )
 
 func showSetupPMHelp() {
@@ -212,4 +212,3 @@ func stringsHasPrefix(s, prefix string) bool {
 	}
 	return false
 }
-

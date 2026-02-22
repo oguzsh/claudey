@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/everything-claude-code/internal/sysutil"
+	"github.com/oguzsh/claudey/internal/sysutil"
 )
 
 // IsGitRepo returns true if the current directory is in a git repository.
@@ -88,4 +88,3 @@ func ModifiedFiles(patterns []string) []string {
 
 	return matched
 }
-

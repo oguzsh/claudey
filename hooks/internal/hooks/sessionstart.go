@@ -3,11 +3,11 @@ package hooks
 import (
 	"strings"
 
-	"github.com/oguzsh/everything-claude-code/internal/aliases"
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/pkgmanager"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/aliases"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/pkgmanager"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 // SessionStart loads previous context and detects package manager.
@@ -58,4 +58,3 @@ func SessionStart() {
 		hookio.Log(pkgmanager.SelectionPrompt())
 	}
 }
-

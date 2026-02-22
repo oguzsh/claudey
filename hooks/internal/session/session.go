@@ -11,9 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/oguzsh/everything-claude-code/internal/fileutil"
-	"github.com/oguzsh/everything-claude-code/internal/hookio"
-	"github.com/oguzsh/everything-claude-code/internal/platform"
+	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/internal/platform"
 )
 
 // Session filename pattern: YYYY-MM-DD-[short-id]-session.tmp
@@ -374,4 +374,3 @@ func Exists(sessionPath string) bool {
 	}
 	return !info.IsDir()
 }
-
