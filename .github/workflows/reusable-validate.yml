@@ -4,10 +4,10 @@ on:
   workflow_call:
     inputs:
       node-version:
-        description: 'Node.js version'
+        description: "Node.js version"
         required: false
         type: string
-        default: '20.x'
+        default: "20.x"
 
 jobs:
   validate:
@@ -24,17 +24,22 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
       - name: Validate agents
-        run: node scripts/ci/validate-agents.js
+        run: go run ./scripts/claudey-hooks validate-agents
 
       - name: Validate hooks
-        run: node scripts/ci/validate-hooks.js
+        run: go run ./scripts/claudey-hooks validate-hooks
 
       - name: Validate commands
-        run: node scripts/ci/validate-commands.js
+        run: go run ./scripts/claudey-hooks validate-commands
 
       - name: Validate skills
-        run: node scripts/ci/validate-skills.js
+        run: go run ./scripts/claudey-hooks validate-skills
 
       - name: Validate rules
-        run: node scripts/ci/validate-rules.js
+        run: go run ./scripts/claudey-hooks validate-rules

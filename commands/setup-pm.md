@@ -11,16 +11,16 @@ Configure your preferred package manager for this project or globally.
 
 ```bash
 # Detect current package manager
-node scripts/setup-package-manager.js --detect
+"$CLAUDE_PLUGIN_ROOT/hooks/bin/claudey-hooks" setup-pm --detect
 
 # Set global preference
-node scripts/setup-package-manager.js --global pnpm
+"$CLAUDE_PLUGIN_ROOT/hooks/bin/claudey-hooks" setup-pm --global pnpm
 
 # Set project preference
-node scripts/setup-package-manager.js --project bun
+"$CLAUDE_PLUGIN_ROOT/hooks/bin/claudey-hooks" setup-pm --project bun
 
 # List available package managers
-node scripts/setup-package-manager.js --list
+"$CLAUDE_PLUGIN_ROOT/hooks/bin/claudey-hooks" setup-pm --list
 ```
 
 ## Detection Priority
@@ -37,25 +37,28 @@ When determining which package manager to use, the following order is checked:
 ## Configuration Files
 
 ### Global Configuration
+
 ```json
 // ~/.claude/package-manager.json
 {
-  "packageManager": "pnpm"
+	"packageManager": "pnpm"
 }
 ```
 
 ### Project Configuration
+
 ```json
 // .claude/package-manager.json
 {
-  "packageManager": "bun"
+	"packageManager": "bun"
 }
 ```
 
 ### package.json
+
 ```json
 {
-  "packageManager": "pnpm@8.6.0"
+	"packageManager": "pnpm@8.6.0"
 }
 ```
 
@@ -76,5 +79,5 @@ export CLAUDE_PACKAGE_MANAGER=pnpm
 To see current package manager detection results, run:
 
 ```bash
-node scripts/setup-package-manager.js --detect
+"$CLAUDE_PLUGIN_ROOT/hooks/bin/claudey-hooks" setup-pm --detect
 ```
