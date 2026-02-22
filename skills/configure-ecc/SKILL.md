@@ -17,7 +17,8 @@ An interactive, step-by-step installation wizard for the Everything Claude Code 
 ## Prerequisites
 
 This skill must be accessible to Claude Code before activation. Two ways to bootstrap:
-1. **Via Plugin**: `/plugin install everything-claude-code` — the plugin loads this skill automatically
+
+1. **Via Plugin**: `/plugin install claudey` — the plugin loads this skill automatically
 2. **Manual**: Copy only this skill to `~/.claude/skills/configure-ecc/SKILL.md`, then activate by saying "configure ecc"
 
 ---
@@ -27,11 +28,11 @@ This skill must be accessible to Claude Code before activation. Two ways to boot
 Before any installation, clone the latest ECC source to `/tmp`:
 
 ```bash
-rm -rf /tmp/everything-claude-code
-git clone https://github.com/affaan-m/everything-claude-code.git /tmp/everything-claude-code
+rm -rf /tmp/claudey
+git clone https://github.com/oguzsh/claudey.git /tmp/claudey
 ```
 
-Set `ECC_ROOT=/tmp/everything-claude-code` as the source for all subsequent copy operations.
+Set `ECC_ROOT=/tmp/claudey` as the source for all subsequent copy operations.
 
 If the clone fails (network issues, etc.), use `AskUserQuestion` to ask the user to provide a local path to an existing ECC clone.
 
@@ -50,11 +51,13 @@ Options:
 ```
 
 Store the choice as `INSTALL_LEVEL`. Set the target directory:
+
 - User-level: `TARGET=~/.claude`
 - Project-level: `TARGET=.claude` (relative to current project root)
 - Both: `TARGET_USER=~/.claude`, `TARGET_PROJECT=.claude`
 
 Create the target directories if they don't exist:
+
 ```bash
 mkdir -p $TARGET/skills $TARGET/rules
 ```
@@ -70,7 +73,7 @@ There are 27 skills organized into 4 categories. Use `AskUserQuestion` with `mul
 ```
 Question: "Which skill categories do you want to install?"
 Options:
-  - "Framework & Language" — "Django, Spring Boot, Go, Python, Java, Frontend, Backend patterns"
+  - "Framework & Language" — "Python, Frontend, Backend patterns"
   - "Database" — "PostgreSQL, ClickHouse, JPA/Hibernate patterns"
   - "Workflow & Quality" — "TDD, verification, learning, security review, compaction"
   - "All skills" — "Install every available skill"
@@ -82,55 +85,37 @@ For each selected category, print the full list of skills below and ask the user
 
 **Category: Framework & Language (16 skills)**
 
-| Skill | Description |
-|-------|-------------|
-| `backend-patterns` | Backend architecture, API design, server-side best practices for Node.js/Express/Next.js |
-| `coding-standards` | Universal coding standards for TypeScript, JavaScript, React, Node.js |
-| `django-patterns` | Django architecture, REST API with DRF, ORM, caching, signals, middleware |
-| `django-security` | Django security: auth, CSRF, SQL injection, XSS prevention |
-| `django-tdd` | Django testing with pytest-django, factory_boy, mocking, coverage |
-| `django-verification` | Django verification loop: migrations, linting, tests, security scans |
-| `frontend-patterns` | React, Next.js, state management, performance, UI patterns |
-| `golang-patterns` | Idiomatic Go patterns, conventions for robust Go applications |
-| `golang-testing` | Go testing: table-driven tests, subtests, benchmarks, fuzzing |
-| `java-coding-standards` | Java coding standards for Spring Boot: naming, immutability, Optional, streams |
-| `python-patterns` | Pythonic idioms, PEP 8, type hints, best practices |
-| `python-testing` | Python testing with pytest, TDD, fixtures, mocking, parametrization |
-| `springboot-patterns` | Spring Boot architecture, REST API, layered services, caching, async |
-| `springboot-security` | Spring Security: authn/authz, validation, CSRF, secrets, rate limiting |
-| `springboot-tdd` | Spring Boot TDD with JUnit 5, Mockito, MockMvc, Testcontainers |
-| `springboot-verification` | Spring Boot verification: build, static analysis, tests, security scans |
+| Skill               | Description                                                                              |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `backend-patterns`  | Backend architecture, API design, server-side best practices for Node.js/Express/Next.js |
+| `coding-standards`  | Universal coding standards for TypeScript, JavaScript, React, Node.js                    |
+| `frontend-patterns` | React, Next.js, state management, performance, UI patterns                               |
+| `python-patterns`   | Pythonic idioms, PEP 8, type hints, best practices                                       |
+| `python-testing`    | Python testing with pytest, TDD, fixtures, mocking, parametrization                      |
 
-**Category: Database (3 skills)**
+**Category: Database (1 skills)**
 
-| Skill | Description |
-|-------|-------------|
-| `clickhouse-io` | ClickHouse patterns, query optimization, analytics, data engineering |
-| `jpa-patterns` | JPA/Hibernate entity design, relationships, query optimization, transactions |
+| Skill               | Description                                                      |
+| ------------------- | ---------------------------------------------------------------- |
 | `postgres-patterns` | PostgreSQL query optimization, schema design, indexing, security |
 
 **Category: Workflow & Quality (8 skills)**
 
-| Skill | Description |
-|-------|-------------|
-| `continuous-learning` | Auto-extract reusable patterns from sessions as learned skills |
+| Skill                    | Description                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------ |
+| `continuous-learning`    | Auto-extract reusable patterns from sessions as learned skills                       |
 | `continuous-learning-v2` | Instinct-based learning with confidence scoring, evolves into skills/commands/agents |
-| `eval-harness` | Formal evaluation framework for eval-driven development (EDD) |
-| `iterative-retrieval` | Progressive context refinement for subagent context problem |
-| `security-review` | Security checklist: auth, input, secrets, API, payment features |
-| `strategic-compact` | Suggests manual context compaction at logical intervals |
-| `tdd-workflow` | Enforces TDD with 80%+ coverage: unit, integration, E2E |
-| `verification-loop` | Verification and quality loop patterns |
-
-**Standalone**
-
-| Skill | Description |
-|-------|-------------|
-| `project-guidelines-example` | Template for creating project-specific skills |
+| `eval-harness`           | Formal evaluation framework for eval-driven development (EDD)                        |
+| `iterative-retrieval`    | Progressive context refinement for subagent context problem                          |
+| `security-review`        | Security checklist: auth, input, secrets, API, payment features                      |
+| `strategic-compact`      | Suggests manual context compaction at logical intervals                              |
+| `tdd-workflow`           | Enforces TDD with 80%+ coverage: unit, integration, E2E                              |
+| `verification-loop`      | Verification and quality loop patterns                                               |
 
 ### 2c: Execute Installation
 
 For each selected skill, copy the entire skill directory:
+
 ```bash
 cp -r $ECC_ROOT/skills/<skill-name> $TARGET/skills/
 ```
@@ -149,10 +134,10 @@ Options:
   - "Common rules (Recommended)" — "Language-agnostic principles: coding style, git workflow, testing, security, etc. (8 files)"
   - "TypeScript/JavaScript" — "TS/JS patterns, hooks, testing with Playwright (5 files)"
   - "Python" — "Python patterns, pytest, black/ruff formatting (5 files)"
-  - "Go" — "Go patterns, table-driven tests, gofmt/staticcheck (5 files)"
 ```
 
 Execute installation:
+
 ```bash
 # Common rules (flat copy into rules/)
 cp -r $ECC_ROOT/rules/common/* $TARGET/rules/
@@ -164,6 +149,7 @@ cp -r $ECC_ROOT/rules/golang/* $TARGET/rules/        # if selected
 ```
 
 **Important**: If the user selects any language-specific rules but NOT common rules, warn them:
+
 > "Language-specific rules extend the common rules. Installing without common rules may result in incomplete coverage. Install common rules too?"
 
 ---
@@ -175,6 +161,7 @@ After installation, perform these automated checks:
 ### 4a: Verify File Existence
 
 List all installed files and confirm they exist at the target location:
+
 ```bash
 ls -la $TARGET/skills/
 ls -la $TARGET/rules/
@@ -183,6 +170,7 @@ ls -la $TARGET/rules/
 ### 4b: Check Path References
 
 Scan all installed `.md` files for path references:
+
 ```bash
 grep -rn "~/.claude/" $TARGET/skills/ $TARGET/rules/
 grep -rn "../common/" $TARGET/rules/
@@ -190,6 +178,7 @@ grep -rn "skills/" $TARGET/skills/
 ```
 
 **For project-level installs**, flag any references to `~/.claude/` paths:
+
 - If a skill references `~/.claude/settings.json` — this is usually fine (settings are always user-level)
 - If a skill references `~/.claude/skills/` or `~/.claude/rules/` — this may be broken if installed only at project level
 - If a skill references another skill by name — check that the referenced skill was also installed
@@ -197,16 +186,15 @@ grep -rn "skills/" $TARGET/skills/
 ### 4c: Check Cross-References Between Skills
 
 Some skills reference others. Verify these dependencies:
-- `django-tdd` may reference `django-patterns`
-- `springboot-tdd` may reference `springboot-patterns`
+
 - `continuous-learning-v2` references `~/.claude/homunculus/` directory
 - `python-testing` may reference `python-patterns`
-- `golang-testing` may reference `golang-patterns`
 - Language-specific rules reference `common/` counterparts
 
 ### 4d: Report Issues
 
 For each issue found, report:
+
 1. **File**: The file containing the problematic reference
 2. **Line**: The line number
 3. **Issue**: What's wrong (e.g., "references ~/.claude/skills/python-patterns but python-patterns was not installed")
@@ -228,6 +216,7 @@ Options:
 ```
 
 ### If optimizing skills:
+
 1. Read each installed SKILL.md
 2. Ask the user what their project's tech stack is (if not already known)
 3. For each skill, suggest removals of irrelevant sections
@@ -235,6 +224,7 @@ Options:
 5. Fix any path issues found in Step 4
 
 ### If optimizing rules:
+
 1. Read each installed rule .md file
 2. Ask the user about their preferences:
    - Test coverage target (default 80%)
@@ -252,7 +242,7 @@ Options:
 Clean up the cloned repository from `/tmp`:
 
 ```bash
-rm -rf /tmp/everything-claude-code
+rm -rf /tmp/claudey
 ```
 
 Then print a summary report:
@@ -285,14 +275,17 @@ Then print a summary report:
 ## Troubleshooting
 
 ### "Skills not being picked up by Claude Code"
+
 - Verify the skill directory contains a `SKILL.md` file (not just loose .md files)
 - For user-level: check `~/.claude/skills/<skill-name>/SKILL.md` exists
 - For project-level: check `.claude/skills/<skill-name>/SKILL.md` exists
 
 ### "Rules not working"
+
 - Rules are flat files, not in subdirectories: `$TARGET/rules/coding-style.md` (correct) vs `$TARGET/rules/common/coding-style.md` (incorrect for flat install)
 - Restart Claude Code after installing rules
 
 ### "Path reference errors after project-level install"
+
 - Some skills assume `~/.claude/` paths. Run Step 4 verification to find and fix these.
 - For `continuous-learning-v2`, the `~/.claude/homunculus/` directory is always user-level — this is expected and not an error.
