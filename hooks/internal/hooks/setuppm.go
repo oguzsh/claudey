@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/oguzsh/claudey/internal/pkgmanager"
+	"github.com/oguzsh/claudey/hooks/internal/pkgmanager"
 )
 
 func showSetupPMHelp() {

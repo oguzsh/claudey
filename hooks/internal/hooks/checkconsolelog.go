@@ -4,9 +4,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/gitutil"
-	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/gitutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
 )
 
 var excludedPatterns = []*regexp.Regexp{

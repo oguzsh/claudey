@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/sysutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/sysutil"
 )
 
 var tsExtRe = regexp.MustCompile(`\.(ts|tsx)$`)

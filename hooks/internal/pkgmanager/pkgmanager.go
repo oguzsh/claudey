@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/platform"
-	"github.com/oguzsh/claudey/internal/sysutil"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/platform"
+	"github.com/oguzsh/claudey/hooks/internal/sysutil"
 )
 
 // Config holds the commands for a package manager.

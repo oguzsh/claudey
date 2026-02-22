@@ -5,8 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
 )
 
 var jstsExtRe = regexp.MustCompile(`\.(ts|tsx|js|jsx)$`)

@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/platform"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/platform"
 )
 
 // EvaluateSession evaluates a session for extractable patterns.

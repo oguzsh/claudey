@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/oguzsh/claudey/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
 )
 
 func TestDetectFromLockFile(t *testing.T) {

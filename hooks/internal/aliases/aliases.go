@@ -12,9 +12,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/platform"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/platform"
 )
 
 const aliasVersion = "1.0"

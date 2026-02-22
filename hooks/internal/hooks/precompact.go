@@ -3,10 +3,10 @@ package hooks
 import (
 	"path/filepath"
 
-	"github.com/oguzsh/claudey/internal/datetime"
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/platform"
+	"github.com/oguzsh/claudey/hooks/internal/datetime"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/platform"
 )
 
 // PreCompact saves state before context compaction.

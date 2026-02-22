@@ -3,11 +3,11 @@ package hooks
 import (
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/aliases"
-	"github.com/oguzsh/claudey/internal/fileutil"
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/pkgmanager"
-	"github.com/oguzsh/claudey/internal/platform"
+	"github.com/oguzsh/claudey/hooks/internal/aliases"
+	"github.com/oguzsh/claudey/hooks/internal/fileutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/pkgmanager"
+	"github.com/oguzsh/claudey/hooks/internal/platform"
 )
 
 // SessionStart loads previous context and detects package manager.

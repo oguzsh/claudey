@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/sysutil"
+	"github.com/oguzsh/claudey/hooks/internal/sysutil"
 )
 
 // IsGitRepo returns true if the current directory is in a git repository.

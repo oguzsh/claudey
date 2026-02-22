@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"regexp"
 
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/sysutil"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/sysutil"
 )
 
 var jstsFormatRe = regexp.MustCompile(`\.(ts|tsx|js|jsx)$`)

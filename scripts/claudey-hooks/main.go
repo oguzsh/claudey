@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/hooks"
-	"github.com/oguzsh/claudey/internal/validators"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/hooks"
+	"github.com/oguzsh/claudey/hooks/internal/validators"
 )
 
 func main() {

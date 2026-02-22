@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/oguzsh/claudey/internal/hookio"
+	"github.com/oguzsh/claudey/hooks/internal/hookio"
 )
 
 var devServerRe = regexp.MustCompile(`(npm run dev\b|pnpm( run)? dev\b|yarn dev\b|bun run dev\b)`)
