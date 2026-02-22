@@ -14,23 +14,23 @@ Add to your `~/.claude/settings.json`:
 
 ```json
 {
-  "model": "sonnet",
-  "env": {
-    "MAX_THINKING_TOKENS": "10000",
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
-  }
+	"model": "sonnet",
+	"env": {
+		"MAX_THINKING_TOKENS": "10000",
+		"CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50",
+		"CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
+	}
 }
 ```
 
 ### What each setting does
 
-| Setting | Default | Recommended | Effect |
-|---------|---------|-------------|--------|
-| `model` | opus | **sonnet** | Sonnet handles ~80% of coding tasks well. Switch to Opus with `/model opus` for complex reasoning. ~60% cost reduction. |
-| `MAX_THINKING_TOKENS` | 31,999 | **10,000** | Extended thinking reserves up to 31,999 output tokens per request for internal reasoning. Reducing this cuts hidden cost by ~70%. Set to `0` to disable for trivial tasks. |
-| `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` | 95 | **50** | Auto-compaction triggers when context reaches this % of capacity. Default 95% is too late — quality degrades before that. Compacting at 50% keeps sessions healthier. |
-| `CLAUDE_CODE_SUBAGENT_MODEL` | _(inherits main)_ | **haiku** | Subagents (Task tool) run on this model. Haiku is ~80% cheaper and sufficient for exploration, file reading, and test running. |
+| Setting                           | Default           | Recommended | Effect                                                                                                                                                                     |
+| --------------------------------- | ----------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`                           | opus              | **sonnet**  | Sonnet handles ~80% of coding tasks well. Switch to Opus with `/model opus` for complex reasoning. ~60% cost reduction.                                                    |
+| `MAX_THINKING_TOKENS`             | 31,999            | **10,000**  | Extended thinking reserves up to 31,999 output tokens per request for internal reasoning. Reducing this cuts hidden cost by ~70%. Set to `0` to disable for trivial tasks. |
+| `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` | 95                | **50**      | Auto-compaction triggers when context reaches this % of capacity. Default 95% is too late — quality degrades before that. Compacting at 50% keeps sessions healthier.      |
+| `CLAUDE_CODE_SUBAGENT_MODEL`      | _(inherits main)_ | **haiku**   | Subagents (Task tool) run on this model. Haiku is ~80% cheaper and sufficient for exploration, file reading, and test running.                                             |
 
 ### Toggling extended thinking
 
@@ -43,11 +43,11 @@ Add to your `~/.claude/settings.json`:
 
 Use the right model for the task:
 
-| Model | Best for | Cost |
-|-------|----------|------|
-| **Haiku** | Subagent exploration, file reading, simple lookups | Lowest |
-| **Sonnet** | Day-to-day coding, reviews, test writing, implementation | Medium |
-| **Opus** | Complex architecture, multi-step reasoning, debugging subtle issues | Highest |
+| Model      | Best for                                                            | Cost    |
+| ---------- | ------------------------------------------------------------------- | ------- |
+| **Haiku**  | Subagent exploration, file reading, simple lookups                  | Lowest  |
+| **Sonnet** | Day-to-day coding, reviews, test writing, implementation            | Medium  |
+| **Opus**   | Complex architecture, multi-step reasoning, debugging subtle issues | Highest |
 
 Switch models mid-session:
 
@@ -63,23 +63,25 @@ Switch models mid-session:
 
 ### Commands
 
-| Command | When to use |
-|---------|-------------|
-| `/clear` | Between unrelated tasks. Stale context wastes tokens on every subsequent message. |
+| Command    | When to use                                                                            |
+| ---------- | -------------------------------------------------------------------------------------- |
+| `/clear`   | Between unrelated tasks. Stale context wastes tokens on every subsequent message.      |
 | `/compact` | At logical task breakpoints (after planning, after debugging, before switching focus). |
-| `/cost` | Check token spending for the current session. |
+| `/cost`    | Check token spending for the current session.                                          |
 
 ### Strategic compaction
 
 The `strategic-compact` skill (in `skills/strategic-compact/`) suggests `/compact` at logical intervals rather than relying on auto-compaction, which can trigger mid-task. See the skill's README for hook setup instructions.
 
 **When to compact:**
+
 - After exploration, before implementation
 - After completing a milestone
 - After debugging, before continuing with new work
 - Before a major context shift
 
 **When NOT to compact:**
+
 - Mid-implementation of related changes
 - While debugging an active issue
 - During multi-file refactoring
@@ -95,6 +97,7 @@ Use subagents (Task tool) for exploration instead of reading many files in your 
 Each enabled MCP server adds tool definitions to your context window. The README warns: **keep under 10 enabled per project**.
 
 Tips:
+
 - Run `/mcp` to see active servers and their context cost
 - Prefer CLI tools when available (`gh` instead of GitHub MCP, `aws` instead of AWS MCP)
 - Use `disabledMcpServers` in project config to disable servers per-project
@@ -112,9 +115,9 @@ Tips:
 
 ---
 
-## Future: configure-ecc Integration
+## Future: configure-claudey Integration
 
-The `configure-ecc` install wizard could offer to set these environment variables during setup, with explanations of the cost tradeoffs. This would help new users optimize from day one rather than discovering these settings after hitting limits.
+The `configure-claudey` install wizard could offer to set these environment variables during setup, with explanations of the cost tradeoffs. This would help new users optimize from day one rather than discovering these settings after hitting limits.
 
 ---
 
@@ -134,4 +137,3 @@ CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=50
 CLAUDE_CODE_SUBAGENT_MODEL=haiku
 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 ```
-
