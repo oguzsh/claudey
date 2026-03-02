@@ -38,7 +38,8 @@ jobs:
       # Run tests
       - name: Run build
         shell: bash
-        run: ./bin/build-hooks.sh
+        working-directory: ./bin
+        run: ./build-hooks.sh
 
   validate:
     name: Validate Components
