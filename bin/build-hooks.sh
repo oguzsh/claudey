@@ -2,5 +2,5 @@
 set -e
 
 echo "Building claudey binary..."
-go build -o bin/claudey ./scripts/claudey
+go build -o claudey ../scripts/claudey
 
