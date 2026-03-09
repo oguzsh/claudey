@@ -64,4 +64,5 @@ mmdc -i diagram.mmd -o diagram.png -w 2400 -H 1800 -b white -q
 - *Arrow `->` instead of `-->`*: Flowchart arrows require `-->` (solid) or `-.->` (dotted) 
 - *Colons in labels*: Escape or quote: `A["Step: Init"]` 
 - *Not verifying output*: Always read the PNG after rendering to confirm correctness 
+- *mmdc command not found*: If the user doesn't have mermaid-cli installed, they should use npx @mermaid-js/mermaid-cli <args> instead.
 </common-mistakes>
