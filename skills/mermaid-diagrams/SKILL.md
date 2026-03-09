@@ -27,7 +27,6 @@ mmdc -i diagram.mmd -o diagram.png -w 2400 -H 1800 -b white -q
 | `-H 1800` | Height in pixels |
 | `-b white` | Background color (default is transparent) |
 | `-q` | Quiet mode (suppress stderr noise) |
-| `-p config.json` | Puppeteer config (use if Chromium sandbox errors occur) |
 
 </core-command>
 
