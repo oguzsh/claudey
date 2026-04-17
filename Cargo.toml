@@ -1,0 +1,23 @@
+[package]
+name = "claudey"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "claudey"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
+dirs = "5"
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+walkdir = "2"
+which = "6"
+
+[profile.release]
+lto = "thin"
+strip = true
+codegen-units = 1
