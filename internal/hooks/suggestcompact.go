@@ -53,6 +53,3 @@ func SuggestCompact() {
 		hookio.Logf("[StrategicCompact] %d tool calls - good checkpoint for /compact if context is stale", count)
 	}
 }
-
-
-

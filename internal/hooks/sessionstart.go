@@ -6,7 +6,6 @@ import (
 	"github.com/oguzsh/claudey/internal/aliases"
 	"github.com/oguzsh/claudey/internal/fileutil"
 	"github.com/oguzsh/claudey/internal/hookio"
-	"github.com/oguzsh/claudey/internal/pkgmanager"
 	"github.com/oguzsh/claudey/internal/platform"
 )
 
@@ -48,16 +47,4 @@ func SessionStart() {
 		hookio.Logf("[SessionStart] %d session alias(es) available: %s", len(aliasList), strings.Join(names, ", "))
 		hookio.Log("[SessionStart] Use /sessions load <alias> to continue a previous session")
 	}
-
-	// Detect package manager
-	pm := pkgmanager.Detect("")
-	hookio.Logf("[SessionStart] Package manager: %s (%s)", pm.Name, pm.Source)
-
-	if pm.Source == "default" {
-		hookio.Log("[SessionStart] No package manager preference found.")
-		hookio.Log(pkgmanager.SelectionPrompt())
-	}
 }
-
-
-
