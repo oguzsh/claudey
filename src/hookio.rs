@@ -4,7 +4,6 @@
 
 #![allow(dead_code)]
 
-use anyhow::Result;
 use serde::Serialize;
 use serde_json::Value;
 use std::io::{Read, Write};
@@ -22,6 +21,9 @@ pub fn read_stdin_json(timeout: Duration, max_size: usize) -> (Value, Vec<u8>) {
     let max = if max_size == 0 { DEFAULT_MAX_SIZE } else { max_size };
 
     let (tx, rx) = mpsc::channel::<Vec<u8>>();
+    // NOTE: the reader thread is intentionally detached. This hook binary is
+    // short-lived, so a blocked stdin read is released by process exit. Do not
+    // adapt this into a long-lived process without adding proper cancellation.
     thread::spawn(move || {
         let mut buf = Vec::new();
         let _ = std::io::stdin().take(max as u64).read_to_end(&mut buf);
@@ -38,10 +40,7 @@ pub fn read_stdin_json(timeout: Duration, max_size: usize) -> (Value, Vec<u8>) {
     }
 
     match serde_json::from_slice::<Value>(&raw) {
-        Ok(Value::Object(_)) => match serde_json::from_slice(&raw) {
-            Ok(v) => (v, raw),
-            Err(_) => (Value::Object(Default::default()), raw),
-        },
+        Ok(v @ Value::Object(_)) => (v, raw),
         _ => (Value::Object(Default::default()), raw),
     }
 }
@@ -64,10 +63,12 @@ pub fn output_bytes(b: &[u8]) {
 }
 
 /// Serialize `v` as JSON and write it to stdout via [`output_bytes`].
-pub fn output_json<T: Serialize>(v: &T) -> Result<()> {
-    let data = serde_json::to_vec(v)?;
-    output_bytes(&data);
-    Ok(())
+/// On serialization error, falls back to writing `{}` (matches Go's behaviour).
+pub fn output_json<T: Serialize>(v: &T) {
+    match serde_json::to_vec(v) {
+        Ok(data) => output_bytes(&data),
+        Err(_) => output_bytes(b"{}"),
+    }
 }
 
 /// Write raw bytes to stdout with NO trailing newline.
