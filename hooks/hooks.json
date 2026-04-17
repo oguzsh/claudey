@@ -7,30 +7,9 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" block-dev-server"
-					}
-				],
-				"description": "Block dev servers outside tmux - ensures you can access logs"
-			},
-			{
-				"matcher": "Bash",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" tmux-reminder"
-					}
-				],
-				"description": "Reminder to use tmux for long-running commands"
-			},
-			{
-				"matcher": "Bash",
-				"hooks": [
-					{
-						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" git-push-reminder"
 					}
-				],
-				"description": "Reminder before git push to review changes"
+				]
 			},
 			{
 				"matcher": "Write",
@@ -39,8 +18,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" block-random-docs"
 					}
-				],
-				"description": "Block creation of random .md files - keeps docs consolidated"
+				]
 			},
 			{
 				"matcher": "Edit|Write",
@@ -49,8 +27,16 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" suggest-compact"
 					}
-				],
-				"description": "Suggest manual compaction at logical intervals"
+				]
+			},
+			{
+				"matcher": "*",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning/hooks/observe.sh pre"
+					}
+				]
 			}
 		],
 		"PreCompact": [
@@ -61,8 +47,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" pre-compact"
 					}
-				],
-				"description": "Save state before context compaction"
+				]
 			}
 		],
 		"SessionStart": [
@@ -73,8 +58,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" session-start"
 					}
-				],
-				"description": "Load previous context and detect package manager on new session"
+				]
 			}
 		],
 		"PostToolUse": [
@@ -85,20 +69,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" pr-created-log"
 					}
-				],
-				"description": "Log PR URL and provide review command after PR creation"
-			},
-			{
-				"matcher": "Bash",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" build-analysis",
-						"async": true,
-						"timeout": 30
-					}
-				],
-				"description": "Example: async hook for build analysis (runs in background without blocking)"
+				]
 			},
 			{
 				"matcher": "Edit",
@@ -107,8 +78,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" post-edit-format"
 					}
-				],
-				"description": "Auto-format JS/TS files with Prettier after edits"
+				]
 			},
 			{
 				"matcher": "Edit",
@@ -117,8 +87,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" post-edit-typecheck"
 					}
-				],
-				"description": "TypeScript check after editing .ts/.tsx files"
+				]
 			},
 			{
 				"matcher": "Edit",
@@ -127,8 +96,27 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" post-edit-console-warn"
 					}
-				],
-				"description": "Warn about console.log statements after edits"
+				]
+			},
+			{
+				"matcher": "*",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "${CLAUDE_PLUGIN_ROOT}/skills/continuous-learning/hooks/observe.sh post"
+					}
+				]
+			}
+		],
+		"Notification": [
+			{
+				"matcher": "*",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "afplay /System/Library/Sounds/Glass.aiff"
+					}
+				]
 			}
 		],
 		"Stop": [
@@ -138,9 +126,12 @@
 					{
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" check-console-log"
+					},
+					{
+						"type": "command",
+						"command": "afplay /System/Library/Sounds/Hero.aiff"
 					}
-				],
-				"description": "Check for console.log in modified files after each response"
+				]
 			}
 		],
 		"SessionEnd": [
@@ -151,8 +142,7 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" session-end"
 					}
-				],
-				"description": "Persist session state on end"
+				]
 			},
 			{
 				"matcher": "*",
@@ -161,10 +151,8 @@
 						"type": "command",
 						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" evaluate-session"
 					}
-				],
-				"description": "Evaluate session for extractable patterns"
+				]
 			}
 		]
 	}
 }
-

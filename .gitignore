@@ -31,12 +31,5 @@ __pycache__/
 # Task files (Claude Code teams)
 tasks/
 
-# Personal configs (if any)
-personal/
-private/
-
 # Session templates (not committed)
 examples/sessions/*.tmp
-
-# Local drafts
-marketing/

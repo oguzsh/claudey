@@ -1,19 +1,37 @@
 {
-  "min_session_length": 10,
-  "extraction_threshold": "medium",
-  "auto_approve": false,
-  "learned_skills_path": "~/.claude/skills/learned/",
-  "patterns_to_detect": [
-    "error_resolution",
-    "user_corrections",
-    "workarounds",
-    "debugging_techniques",
-    "project_specific"
-  ],
-  "ignore_patterns": [
-    "simple_typos",
-    "one_time_fixes",
-    "external_api_issues"
-  ]
+	"version": "2.0",
+	"observation": {
+		"enabled": true,
+		"store_path": "~/.claude/book/observations.jsonl",
+		"max_file_size_mb": 10,
+		"archive_after_days": 7,
+		"capture_tools": ["Edit", "Write", "Bash", "Read", "Grep", "Glob"],
+		"ignore_tools": ["TodoWrite"]
+	},
+	"instincts": {
+		"personal_path": "~/.claude/book/instincts/personal/",
+		"inherited_path": "~/.claude/book/instincts/inherited/",
+		"min_confidence": 0.3,
+		"auto_approve_threshold": 0.7,
+		"confidence_decay_rate": 0.02,
+		"max_instincts": 100
+	},
+	"observer": {
+		"enabled": false,
+		"model": "haiku",
+		"run_interval_minutes": 5,
+		"min_observations_to_analyze": 20,
+		"patterns_to_detect": [
+			"user_corrections",
+			"error_resolutions",
+			"repeated_workflows",
+			"tool_preferences",
+			"file_patterns"
+		]
+	},
+	"evolution": {
+		"cluster_threshold": 3,
+		"evolved_path": "~/.claude/book/evolved/",
+		"auto_evolve": false
+	}
 }
-

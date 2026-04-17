@@ -11,7 +11,7 @@
 
 set -e
 
-CONFIG_DIR="${HOME}/.claude/homunculus"
+CONFIG_DIR="${HOME}/.claude/book"
 PID_FILE="${CONFIG_DIR}/.observer.pid"
 LOG_FILE="${CONFIG_DIR}/observer.log"
 OBSERVATIONS_FILE="${CONFIG_DIR}/observations.jsonl"
@@ -141,4 +141,3 @@ case "${1:-start}" in
     exit 1
     ;;
 esac
-

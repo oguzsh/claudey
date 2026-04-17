@@ -289,6 +289,3 @@ func sessionIDShort() string {
 	}
 	return "default"
 }
-
-
-

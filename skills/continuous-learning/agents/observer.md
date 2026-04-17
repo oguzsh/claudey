@@ -18,7 +18,7 @@ A background agent that analyzes observations from Claude Code sessions to detec
 
 ## Input
 
-Reads observations from `~/.claude/homunculus/observations.jsonl`:
+Reads observations from `~/.claude/book/observations.jsonl`:
 
 ```jsonl
 {"timestamp":"2025-01-22T10:30:00Z","event":"tool_start","session":"abc123","tool":"Edit","input":"..."}
@@ -32,7 +32,9 @@ Reads observations from `~/.claude/homunculus/observations.jsonl`:
 Look for these patterns in observations:
 
 ### 1. User Corrections
+
 When a user's follow-up message corrects Claude's previous action:
+
 - "No, use X instead of Y"
 - "Actually, I meant..."
 - Immediate undo/redo patterns
@@ -40,7 +42,9 @@ When a user's follow-up message corrects Claude's previous action:
 → Create instinct: "When doing X, prefer Y"
 
 ### 2. Error Resolutions
+
 When an error is followed by a fix:
+
 - Tool output contains error
 - Next few tool calls fix it
 - Same error type resolved similarly multiple times
@@ -48,7 +52,9 @@ When an error is followed by a fix:
 → Create instinct: "When encountering error X, try Y"
 
 ### 3. Repeated Workflows
+
 When the same sequence of tools is used multiple times:
+
 - Same tool sequence with similar inputs
 - File patterns that change together
 - Time-clustered operations
@@ -56,7 +62,9 @@ When the same sequence of tools is used multiple times:
 → Create workflow instinct: "When doing X, follow steps Y, Z, W"
 
 ### 4. Tool Preferences
+
 When certain tools are consistently preferred:
+
 - Always uses Grep before Edit
 - Prefers Read over Bash cat
 - Uses specific Bash commands for certain tasks
@@ -65,7 +73,7 @@ When certain tools are consistently preferred:
 
 ## Output
 
-Creates/updates instincts in `~/.claude/homunculus/instincts/personal/`:
+Creates/updates instincts in `~/.claude/book/instincts/personal/`:
 
 ```yaml
 ---
@@ -90,12 +98,14 @@ Always use Grep to find the exact location before using Edit.
 ## Confidence Calculation
 
 Initial confidence based on observation frequency:
+
 - 1-2 observations: 0.3 (tentative)
 - 3-5 observations: 0.5 (moderate)
 - 6-10 observations: 0.7 (strong)
 - 11+ observations: 0.85 (very strong)
 
 Confidence adjusts over time:
+
 - +0.05 for each confirming observation
 - -0.1 for each contradicting observation
 - -0.02 per week without observation (decay)
@@ -111,6 +121,7 @@ Confidence adjusts over time:
 ## Example Analysis Session
 
 Given observations:
+
 ```jsonl
 {"event":"tool_start","tool":"Grep","input":"pattern: useState"}
 {"event":"tool_complete","tool":"Grep","output":"Found in 3 files"}
@@ -120,6 +131,7 @@ Given observations:
 ```
 
 Analysis:
+
 - Detected workflow: Grep → Read → Edit
 - Frequency: Seen 5 times this session
 - Create instinct:
@@ -127,12 +139,3 @@ Analysis:
   - action: "Search with Grep, confirm with Read, then Edit"
   - confidence: 0.6
   - domain: "workflow"
-
-## Integration with Skill Creator
-
-When instincts are imported from Skill Creator (repo analysis), they have:
-- `source: "repo-analysis"`
-- `source_repo: "https://github.com/..."`
-
-These should be treated as team/project conventions with higher initial confidence (0.7+).
-
