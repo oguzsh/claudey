@@ -145,9 +145,26 @@ fn routes_block_random_docs() {
         Some(&tmp),
     );
     let _ = std::fs::remove_dir_all(&tmp);
-    // Stub returns 0 → ExitCode::SUCCESS. Once the real hook lands, exit 2 = block.
+    // README.md is in the allow-list, so the hook exits 0.
     assert!(!stderr.contains("Unknown subcommand"));
     assert_eq!(code, Some(0));
+}
+
+#[test]
+fn block_random_docs_blocks_disallowed_md() {
+    let tmp = std::env::temp_dir().join(format!("claudey-it-brd2-{}", std::process::id()));
+    std::fs::create_dir_all(&tmp).unwrap();
+    let (_, _, stderr, code) = run_with_home(
+        "block-random-docs",
+        Some(r#"{"tool_input":{"file_path":"random-notes.md"}}"#),
+        Some(&tmp),
+    );
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert_eq!(code, Some(2), "expected block exit-code 2, got {code:?}");
+    assert!(
+        stderr.contains("BLOCKED"),
+        "expected block message on stderr: {stderr}"
+    );
 }
 
 #[test]
