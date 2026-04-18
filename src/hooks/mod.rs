@@ -7,12 +7,10 @@
 
 use serde_json::Value;
 
+mod session_end;
 mod session_start;
+pub use session_end::session_end;
 pub use session_start::session_start;
-
-pub fn session_end(_input: Value) {
-    eprintln!("session-end stub");
-}
 
 pub fn pre_compact() {
     eprintln!("pre-compact stub");
