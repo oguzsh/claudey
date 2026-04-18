@@ -1,6 +1,8 @@
 mod datetime;
 mod hookio;
 mod platform;
+#[cfg(test)]
+mod testutil;
 
 use std::process::ExitCode;
 

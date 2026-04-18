@@ -13,7 +13,19 @@ pub const IS_LINUX: bool = cfg!(target_os = "linux");
 /// Panics with a clear message if the home directory cannot be determined,
 /// mirroring the Go implementation's `panic(err)`.
 pub fn home_dir() -> PathBuf {
-    dirs::home_dir().expect("unable to determine home directory")
+    if let Some(h) = std::env::var_os("HOME") {
+        if !h.is_empty() {
+            return PathBuf::from(h);
+        }
+    }
+    if IS_WINDOWS {
+        if let Some(p) = std::env::var_os("USERPROFILE") {
+            if !p.is_empty() {
+                return PathBuf::from(p);
+            }
+        }
+    }
+    panic!("unable to determine home directory");
 }
 
 /// Returns the path to the Claude configuration directory (`~/.claude`).
@@ -135,7 +147,7 @@ mod tests {
 
     #[test]
     fn test_ensure_dir_creates_new_directory() {
-        let base = tempfile::tempdir().expect("failed to create temp dir");
+        let base = crate::testutil::TempDir::new();
         let new_dir = base.path().join("a").join("b").join("c");
 
         ensure_dir(&new_dir).expect("ensure_dir should not fail on a new nested path");
@@ -146,14 +158,13 @@ mod tests {
 
     #[test]
     fn test_ensure_dir_existing_directory_is_no_op() {
-        let base = tempfile::tempdir().expect("failed to create temp dir");
-        // The temp dir already exists — calling ensure_dir should be a no-op.
+        let base = crate::testutil::TempDir::new();
         ensure_dir(base.path()).expect("ensure_dir on existing dir should not error");
     }
 
     #[test]
     fn test_ensure_dir_returns_error_for_invalid_path() {
-        let base = tempfile::tempdir().expect("failed to create temp dir");
+        let base = crate::testutil::TempDir::new();
         let file_path = base.path().join("file.txt");
         fs::write(&file_path, b"hello").expect("setup: could not create file");
 
