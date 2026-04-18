@@ -1,3 +1,4 @@
+mod aliases;
 mod datetime;
 mod fileutil;
 mod gitutil;
