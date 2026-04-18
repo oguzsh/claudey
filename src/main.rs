@@ -1,4 +1,5 @@
 mod hookio;
+mod platform;
 
 use std::process::ExitCode;
 
