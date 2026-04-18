@@ -1,10 +1,7 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "Running validations..."
-go run ./scripts/claudey validate-agents
-go run ./scripts/claudey validate-commands
-go run ./scripts/claudey validate-rules
-go run ./scripts/claudey validate-skills
-go run ./scripts/claudey validate-hooks
-echo "All validations passed!"
+cd "$(dirname "$0")/.."
+echo "Running cargo test..."
+cargo test
+echo "All tests passed!"

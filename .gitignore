@@ -33,3 +33,6 @@ tasks/
 
 # Session templates (not committed)
 examples/sessions/*.tmp
+
+# Rust build output
+target/
