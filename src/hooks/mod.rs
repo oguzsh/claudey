@@ -10,13 +10,11 @@ use serde_json::Value;
 mod pre_compact;
 mod session_end;
 mod session_start;
+mod suggest_compact;
 pub use pre_compact::pre_compact;
 pub use session_end::session_end;
 pub use session_start::session_start;
-
-pub fn suggest_compact() {
-    eprintln!("suggest-compact stub");
-}
+pub use suggest_compact::suggest_compact;
 
 pub fn post_edit_format(_input: Value, _raw: Vec<u8>) {
     eprintln!("post-edit-format stub");
