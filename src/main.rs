@@ -1,4 +1,5 @@
 mod datetime;
+mod fileutil;
 mod hookio;
 mod platform;
 mod sysutil;
