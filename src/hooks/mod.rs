@@ -7,14 +7,12 @@
 
 use serde_json::Value;
 
+mod pre_compact;
 mod session_end;
 mod session_start;
+pub use pre_compact::pre_compact;
 pub use session_end::session_end;
 pub use session_start::session_start;
-
-pub fn pre_compact() {
-    eprintln!("pre-compact stub");
-}
 
 pub fn suggest_compact() {
     eprintln!("suggest-compact stub");

@@ -161,6 +161,28 @@ fn routes_pr_created_log() {
 // ── session-start behavioral check ────────────────────────────────────────
 
 #[test]
+fn pre_compact_writes_compaction_log() {
+    let tmp = std::env::temp_dir().join(format!(
+        "claudey-it-pc-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0)
+    ));
+    std::fs::create_dir_all(&tmp).unwrap();
+    let (ok, _, _, _) = run_with_home("pre-compact", None, Some(&tmp));
+    assert!(ok);
+    let log = tmp.join(".claude/sessions/compaction-log.txt");
+    let content = std::fs::read_to_string(&log).expect("compaction-log.txt should exist");
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert!(
+        content.contains("Context compaction triggered"),
+        "log missing expected text: {content}"
+    );
+}
+
+#[test]
 fn session_start_surfaces_previous_session_summary() {
     let tmp = std::env::temp_dir().join(format!(
         "claudey-it-ss-{}-{}",
