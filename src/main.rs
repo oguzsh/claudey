@@ -1,6 +1,7 @@
 mod datetime;
 mod hookio;
 mod platform;
+mod sysutil;
 #[cfg(test)]
 mod testutil;
 
