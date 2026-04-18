@@ -7,9 +7,8 @@
 
 use serde_json::Value;
 
-pub fn session_start() {
-    eprintln!("session-start stub");
-}
+mod session_start;
+pub use session_start::session_start;
 
 pub fn session_end(_input: Value) {
     eprintln!("session-end stub");

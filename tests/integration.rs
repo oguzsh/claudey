@@ -1,14 +1,21 @@
 use std::io::Write;
+use std::path::Path;
 use std::process::{Command, Stdio};
 
 /// Run the binary with the given subcommand, optionally piping JSON to stdin.
-/// Returns `(success, stdout, stderr, exit_code)`.
-fn run(subcmd: &str, stdin_json: Option<&str>) -> (bool, String, String, Option<i32>) {
+/// Returns `(success, stdout, stderr, exit_code)`. An empty `HOME` override
+/// can be supplied to sandbox hooks that touch `~/.claude`.
+fn run_with_home(subcmd: &str, stdin_json: Option<&str>, home: Option<&Path>) -> (bool, String, String, Option<i32>) {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_claudey"));
     if !subcmd.is_empty() {
         cmd.arg(subcmd);
     }
-    cmd.stdin(Stdio::piped()).stdout(Stdio::piped()).stderr(Stdio::piped());
+    if let Some(h) = home {
+        cmd.env("HOME", h);
+    }
+    cmd.stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
     let mut child = cmd.spawn().expect("spawn binary");
     if let Some(json) = stdin_json {
         let mut sin = child.stdin.take().expect("stdin");
@@ -21,6 +28,33 @@ fn run(subcmd: &str, stdin_json: Option<&str>) -> (bool, String, String, Option<
         String::from_utf8_lossy(&out.stderr).to_string(),
         out.status.code(),
     )
+}
+
+fn run(subcmd: &str, stdin_json: Option<&str>) -> (bool, String, String, Option<i32>) {
+    run_with_home(subcmd, stdin_json, None)
+}
+
+/// Assert a subcommand routes cleanly: exit success AND stderr does not
+/// carry the "Unknown subcommand" dispatch failure.
+fn assert_routes(subcmd: &str, stdin_json: Option<&str>) {
+    // Give each hook a fresh sandbox HOME so file I/O stays isolated.
+    let tmp = std::env::temp_dir().join(format!(
+        "claudey-it-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0)
+    ));
+    std::fs::create_dir_all(&tmp).unwrap();
+    let (ok, _, stderr, _) = run_with_home(subcmd, stdin_json, Some(&tmp));
+    let _ = std::fs::remove_dir_all(&tmp);
+
+    assert!(
+        !stderr.contains("Unknown subcommand"),
+        "subcommand {subcmd:?} failed to route: {stderr}"
+    );
+    assert!(ok, "subcommand {subcmd:?} exited non-zero: {stderr}");
 }
 
 #[test]
@@ -37,90 +71,119 @@ fn unknown_subcommand_fails_with_message() {
     assert!(stderr.contains("Unknown subcommand"));
 }
 
-// ── routing tests: each in-scope subcommand reaches its stub ──────────────
+// ── routing tests: each in-scope subcommand routes cleanly ────────────────
 
 #[test]
 fn routes_session_start() {
-    let (_, _, stderr, _) = run("session-start", None);
-    assert!(stderr.contains("session-start"));
+    assert_routes("session-start", None);
 }
 
 #[test]
 fn routes_session_end() {
-    let (_, _, stderr, _) = run("session-end", Some("{}"));
-    assert!(stderr.contains("session-end"));
+    assert_routes("session-end", Some("{}"));
 }
 
 #[test]
 fn routes_pre_compact() {
-    let (_, _, stderr, _) = run("pre-compact", None);
-    assert!(stderr.contains("pre-compact"));
+    assert_routes("pre-compact", None);
 }
 
 #[test]
 fn routes_suggest_compact() {
-    let (_, _, stderr, _) = run("suggest-compact", None);
-    assert!(stderr.contains("suggest-compact"));
+    assert_routes("suggest-compact", None);
 }
 
 #[test]
 fn routes_post_edit_format() {
-    let (_, _, stderr, _) = run("post-edit-format", Some(r#"{"tool_input":{"file_path":"a.ts"}}"#));
-    assert!(stderr.contains("post-edit-format"));
+    assert_routes(
+        "post-edit-format",
+        Some(r#"{"tool_input":{"file_path":"a.ts"}}"#),
+    );
 }
 
 #[test]
 fn routes_post_edit_typecheck() {
-    let (_, _, stderr, _) = run("post-edit-typecheck", Some(r#"{"tool_input":{"file_path":"a.ts"}}"#));
-    assert!(stderr.contains("post-edit-typecheck"));
+    assert_routes(
+        "post-edit-typecheck",
+        Some(r#"{"tool_input":{"file_path":"a.ts"}}"#),
+    );
 }
 
 #[test]
 fn routes_post_edit_console_warn() {
-    let (_, _, stderr, _) = run(
+    assert_routes(
         "post-edit-console-warn",
         Some(r#"{"tool_input":{"file_path":"a.ts"}}"#),
     );
-    assert!(stderr.contains("post-edit-console-warn"));
 }
 
 #[test]
 fn routes_check_console_log() {
-    let (_, _, stderr, _) = run("check-console-log", Some("{}"));
-    assert!(stderr.contains("check-console-log"));
+    assert_routes("check-console-log", Some("{}"));
 }
 
 #[test]
 fn routes_evaluate_session() {
-    let (_, _, stderr, _) = run("evaluate-session", Some("{}"));
-    assert!(stderr.contains("evaluate-session"));
+    assert_routes("evaluate-session", Some("{}"));
 }
 
 #[test]
 fn routes_git_push_reminder() {
-    let (_, _, stderr, _) = run(
+    assert_routes(
         "git-push-reminder",
         Some(r#"{"tool_input":{"command":"git push"}}"#),
     );
-    assert!(stderr.contains("git-push-reminder"));
 }
 
 #[test]
 fn routes_block_random_docs() {
-    // Stub returns 0 → success.
-    let (_, _, stderr, code) = run(
+    let tmp = std::env::temp_dir().join(format!("claudey-it-brd-{}", std::process::id()));
+    std::fs::create_dir_all(&tmp).unwrap();
+    let (_, _, stderr, code) = run_with_home(
         "block-random-docs",
         Some(r#"{"tool_input":{"file_path":"README.md"}}"#),
+        Some(&tmp),
     );
-    assert!(stderr.contains("block-random-docs"));
+    let _ = std::fs::remove_dir_all(&tmp);
+    // Stub returns 0 → ExitCode::SUCCESS. Once the real hook lands, exit 2 = block.
+    assert!(!stderr.contains("Unknown subcommand"));
     assert_eq!(code, Some(0));
 }
 
 #[test]
 fn routes_pr_created_log() {
-    let (_, _, stderr, _) = run(
+    assert_routes(
         "pr-created-log",
         Some(r#"{"tool_input":{"command":"gh pr create"}}"#),
     );
-    assert!(stderr.contains("pr-created-log"));
+}
+
+// ── session-start behavioral check ────────────────────────────────────────
+
+#[test]
+fn session_start_surfaces_previous_session_summary() {
+    let tmp = std::env::temp_dir().join(format!(
+        "claudey-it-ss-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0)
+    ));
+    let sessions = tmp.join(".claude").join("sessions");
+    std::fs::create_dir_all(&sessions).unwrap();
+    let f = sessions.join("2026-04-18-abc12345-session.tmp");
+    std::fs::write(&f, "# Session 2026-04-18\n\nSome real summary content.\n").unwrap();
+
+    let (ok, stdout, stderr, _) = run_with_home("session-start", None, Some(&tmp));
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert!(ok);
+    assert!(
+        stderr.contains("[SessionStart] Found 1 recent session(s)"),
+        "expected discovery log in stderr: {stderr}"
+    );
+    assert!(
+        stdout.contains("Previous session summary"),
+        "expected summary on stdout: {stdout}"
+    );
 }
