@@ -7,22 +7,20 @@
 
 use serde_json::Value;
 
+mod post_edit_console_warn;
 mod post_edit_format;
 mod post_edit_typecheck;
 mod pre_compact;
 mod session_end;
 mod session_start;
 mod suggest_compact;
+pub use post_edit_console_warn::post_edit_console_warn;
 pub use post_edit_format::post_edit_format;
 pub use post_edit_typecheck::post_edit_typecheck;
 pub use pre_compact::pre_compact;
 pub use session_end::session_end;
 pub use session_start::session_start;
 pub use suggest_compact::suggest_compact;
-
-pub fn post_edit_console_warn(_input: Value, _raw: Vec<u8>) {
-    eprintln!("post-edit-console-warn stub");
-}
 
 pub fn check_console_log(_raw: Vec<u8>) {
     eprintln!("check-console-log stub");
