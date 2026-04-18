@@ -315,7 +315,11 @@ mod tests {
     fn test_grep_file_line_numbers() {
         let d = TempDir::new();
         let p = d.path().join("test.js");
-        write_file(&p, "line1\nconsole.log('debug')\nline3\nconsole.log('test')\n").unwrap();
+        write_file(
+            &p,
+            "line1\nconsole.log('debug')\nline3\nconsole.log('test')\n",
+        )
+        .unwrap();
 
         let results = grep_file(&p, r"console\.log");
         assert_eq!(results.len(), 2);
@@ -327,7 +331,11 @@ mod tests {
     fn test_count_in_file() {
         let d = TempDir::new();
         let p = d.path().join("test.txt");
-        write_file(&p, r#""type":"user" and "type":"user" plus "type":"assistant""#).unwrap();
+        write_file(
+            &p,
+            r#""type":"user" and "type":"user" plus "type":"assistant""#,
+        )
+        .unwrap();
 
         let n = count_in_file(&p, r#""type"\s*:\s*"user""#);
         assert_eq!(n, 2);
@@ -339,7 +347,11 @@ mod tests {
         let p = d.path().join("test.txt");
         write_file(&p, "**Last Updated:** 10:00").unwrap();
 
-        assert!(replace_in_file(&p, "**Last Updated:** 10:00", "**Last Updated:** 11:30"));
+        assert!(replace_in_file(
+            &p,
+            "**Last Updated:** 10:00",
+            "**Last Updated:** 11:30"
+        ));
         assert_eq!(read_file(&p).unwrap(), "**Last Updated:** 11:30");
     }
 
@@ -398,11 +410,7 @@ mod tests {
         ];
         for (glob, input, want) in cases {
             let re = Regex::new(&format!("^{}$", glob_to_regex(glob))).unwrap();
-            assert_eq!(
-                re.is_match(input),
-                want,
-                "glob={glob:?} input={input:?}"
-            );
+            assert_eq!(re.is_match(input), want, "glob={glob:?} input={input:?}");
         }
     }
 

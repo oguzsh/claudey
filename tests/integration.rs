@@ -5,7 +5,11 @@ use std::process::{Command, Stdio};
 /// Run the binary with the given subcommand, optionally piping JSON to stdin.
 /// Returns `(success, stdout, stderr, exit_code)`. An empty `HOME` override
 /// can be supplied to sandbox hooks that touch `~/.claude`.
-fn run_with_home(subcmd: &str, stdin_json: Option<&str>, home: Option<&Path>) -> (bool, String, String, Option<i32>) {
+fn run_with_home(
+    subcmd: &str,
+    stdin_json: Option<&str>,
+    home: Option<&Path>,
+) -> (bool, String, String, Option<i32>) {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_claudey"));
     if !subcmd.is_empty() {
         cmd.arg(subcmd);

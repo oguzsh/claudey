@@ -1,6 +1,5 @@
 //! Small test-only helpers. Avoids pulling in `tempfile` as a dep.
-
-#![cfg(test)]
+//! Module is gated on `#[cfg(test)]` at the `mod testutil;` declaration in `main.rs`.
 
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};

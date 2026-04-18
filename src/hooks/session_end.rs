@@ -287,13 +287,19 @@ pub fn build_summary_section(s: &SessionSummary) -> String {
 }
 
 fn session_id_short() -> String {
-    if let Ok(sid) = std::env::var("CLAUDE_SESSION_ID") {
+    session_id_short_from(std::env::var("CLAUDE_SESSION_ID").ok().as_deref())
+}
+
+/// Pure variant that derives the short session id from an explicit env value.
+/// Separated from `session_id_short` so tests never touch process-global env.
+fn session_id_short_from(env_sid: Option<&str>) -> String {
+    if let Some(sid) = env_sid {
         if !sid.is_empty() {
             let len = sid.chars().count();
             if len > 8 {
                 return sid.chars().skip(len - 8).collect();
             }
-            return sid;
+            return sid.to_string();
         }
     }
     let name = gitutil::project_name();
@@ -326,9 +332,7 @@ mod tests {
         let d = TempDir::new();
         let p = d.path().join("t.jsonl");
         let long = "x".repeat(500);
-        let line = format!(
-            r#"{{"type":"user","message":{{"role":"user","content":"{long}"}}}}"#
-        );
+        let line = format!(r#"{{"type":"user","message":{{"role":"user","content":"{long}"}}}}"#);
         write_jsonl(&p, &[&line]);
         let s = extract_session_summary(&p).unwrap();
         assert_eq!(s.user_messages.len(), 1);
@@ -388,9 +392,20 @@ mod tests {
     }
 
     #[test]
-    fn session_id_short_prefers_env_last_8() {
-        std::env::set_var("CLAUDE_SESSION_ID", "abcdef1234567890");
-        assert_eq!(session_id_short(), "34567890");
-        std::env::remove_var("CLAUDE_SESSION_ID");
+    fn session_id_short_from_prefers_env_last_8() {
+        assert_eq!(session_id_short_from(Some("abcdef1234567890")), "34567890");
+    }
+
+    #[test]
+    fn session_id_short_from_returns_whole_sid_when_short() {
+        assert_eq!(session_id_short_from(Some("abc123")), "abc123");
+    }
+
+    #[test]
+    fn session_id_short_from_falls_back_when_empty() {
+        // Without CLAUDE_SESSION_ID, falls back to project_name() or "default".
+        // We only assert that it does NOT return the empty string.
+        assert!(!session_id_short_from(Some("")).is_empty());
+        assert!(!session_id_short_from(None).is_empty());
     }
 }

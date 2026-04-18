@@ -5,41 +5,20 @@
 use crate::hookio;
 use regex::Regex;
 use serde_json::Value;
-use std::sync::OnceLock;
+use std::sync::LazyLock;
 
-fn git_push_re() -> &'static Regex {
-    static RE: OnceLock<Regex> = OnceLock::new();
-    RE.get_or_init(|| Regex::new(r"git push").unwrap())
-}
-
-fn random_doc_re() -> &'static Regex {
-    static RE: OnceLock<Regex> = OnceLock::new();
-    RE.get_or_init(|| Regex::new(r"\.(md|txt)$").unwrap())
-}
-
-fn allowed_doc_re() -> &'static Regex {
-    static RE: OnceLock<Regex> = OnceLock::new();
-    RE.get_or_init(|| Regex::new(r"(README|CLAUDE|AGENTS|CONTRIBUTING)\.md$").unwrap())
-}
-
-fn plans_path_re() -> &'static Regex {
-    static RE: OnceLock<Regex> = OnceLock::new();
-    RE.get_or_init(|| Regex::new(r"\.claude/plans/").unwrap())
-}
-
-fn pr_url_re() -> &'static Regex {
-    static RE: OnceLock<Regex> = OnceLock::new();
-    RE.get_or_init(|| Regex::new(r"https://github\.com/[^/]+/[^/]+/pull/\d+").unwrap())
-}
-
-fn gh_pr_create_re() -> &'static Regex {
-    static RE: OnceLock<Regex> = OnceLock::new();
-    RE.get_or_init(|| Regex::new(r"gh pr create").unwrap())
-}
+static GIT_PUSH_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"git push").unwrap());
+static RANDOM_DOC_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\.(md|txt)$").unwrap());
+static ALLOWED_DOC_RE: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"(README|CLAUDE|AGENTS|CONTRIBUTING)\.md$").unwrap());
+static PLANS_PATH_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\.claude/plans/").unwrap());
+static PR_URL_RE: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"https://github\.com/[^/]+/[^/]+/pull/\d+").unwrap());
+static GH_PR_CREATE_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"gh pr create").unwrap());
 
 pub fn git_push_reminder(input: Value, raw: Vec<u8>) {
     let cmd = hookio::get_tool_input_string(&input, "command");
-    if git_push_re().is_match(cmd) {
+    if GIT_PUSH_RE.is_match(cmd) {
         hookio::log("[Hook] Review changes before push...");
         hookio::log("[Hook] Continuing with push (remove this hook to add interactive review)");
     }
@@ -61,7 +40,7 @@ pub fn block_random_docs(input: Value, raw: Vec<u8>) -> i32 {
 
 pub fn pr_created_log(input: Value, raw: Vec<u8>) {
     let cmd = hookio::get_tool_input_string(&input, "command");
-    if gh_pr_create_re().is_match(cmd) {
+    if GH_PR_CREATE_RE.is_match(cmd) {
         let output = hookio::get_tool_output_string(&input, "output");
         if let Some(url) = extract_pr_url(output) {
             hookio::log(&format!("[Hook] PR created: {url}"));
@@ -70,7 +49,9 @@ pub fn pr_created_log(input: Value, raw: Vec<u8>) {
             if parts.len() >= 7 {
                 let repo = format!("{}/{}", parts[3], parts[4]);
                 let pr = parts[6];
-                hookio::log(&format!("[Hook] To review: gh pr review {pr} --repo {repo}"));
+                hookio::log(&format!(
+                    "[Hook] To review: gh pr review {pr} --repo {repo}"
+                ));
             }
         }
     }
@@ -79,13 +60,13 @@ pub fn pr_created_log(input: Value, raw: Vec<u8>) {
 
 pub fn is_blocked_doc(file_path: &str) -> bool {
     !file_path.is_empty()
-        && random_doc_re().is_match(file_path)
-        && !allowed_doc_re().is_match(file_path)
-        && !plans_path_re().is_match(file_path)
+        && RANDOM_DOC_RE.is_match(file_path)
+        && !ALLOWED_DOC_RE.is_match(file_path)
+        && !PLANS_PATH_RE.is_match(file_path)
 }
 
 pub fn extract_pr_url(output: &str) -> Option<&str> {
-    pr_url_re().find(output).map(|m| m.as_str())
+    PR_URL_RE.find(output).map(|m| m.as_str())
 }
 
 #[cfg(test)]

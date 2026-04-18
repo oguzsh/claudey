@@ -105,10 +105,7 @@ mod tests {
             "tests/integration.rs".to_string(),
         ];
         let patterns = [r"\.rs$"];
-        let compiled: Vec<Regex> = patterns
-            .iter()
-            .filter_map(|p| Regex::new(p).ok())
-            .collect();
+        let compiled: Vec<Regex> = patterns.iter().filter_map(|p| Regex::new(p).ok()).collect();
         let matched: Vec<String> = all
             .into_iter()
             .filter(|f| compiled.iter().any(|re| re.is_match(f)))

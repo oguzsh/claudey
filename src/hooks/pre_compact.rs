@@ -21,9 +21,7 @@ pub fn pre_compact() {
         let time_str = datetime::time_string();
         let _ = fileutil::append_file(
             &latest.path,
-            &format!(
-                "\n---\n**[Compaction occurred at {time_str}]** - Context was summarized\n"
-            ),
+            &format!("\n---\n**[Compaction occurred at {time_str}]** - Context was summarized\n"),
         );
     }
 

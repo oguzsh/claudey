@@ -168,7 +168,10 @@ mod tests {
     #[test]
     fn test_run_command_cwd_is_respected() {
         let base = crate::testutil::TempDir::new();
-        let expected = base.path().canonicalize().unwrap_or_else(|_| base.path().to_path_buf());
+        let expected = base
+            .path()
+            .canonicalize()
+            .unwrap_or_else(|_| base.path().to_path_buf());
         #[cfg(unix)]
         let r = run_command("pwd", Some(base.path()));
         #[cfg(windows)]
