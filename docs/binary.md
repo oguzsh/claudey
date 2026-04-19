@@ -9,7 +9,7 @@ bash bin/build-hooks.sh    # cargo build --release + install -m 0755 target/rele
 bash bin/test.sh           # cargo fmt --check + cargo clippy --all-targets -- -D warnings + cargo test
 ```
 
-`bin/claudey` and `bin/claudey.exe` are gitignored. Run `bin/build-hooks.sh` once on each machine after cloning the repo.
+`bin/claudey` and `bin/claudey.exe` are gitignored. For a fresh install on a new machine, run `bin/setup.sh` instead — it handles `rustup` for you when `cargo` is missing, then calls `bin/build-hooks.sh`. See [First-Run Setup](#first-run-setup) below.
 
 ## Subcommands
 
