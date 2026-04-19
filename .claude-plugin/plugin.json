@@ -1,6 +1,6 @@
 {
 	"name": "claudey",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Claudey is a collection of agents, skills, hooks, commands, and rules for Claude Code.",
 	"author": {
 		"name": "Oguzhan Ince"
