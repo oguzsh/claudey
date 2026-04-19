@@ -32,8 +32,8 @@ Then try your first command:
 git clone https://github.com/oguzsh/claudey.git
 cd claudey
 
-# Build bin/claudey locally (Rust toolchain required)
-bash bin/build-hooks.sh
+# One-time setup: prompts to install Rust via rustup if missing, then builds bin/claudey
+bash bin/setup.sh
 
 # Copy what you need to ~/.claude/
 cp -r skills/ ~/.claude/skills/
@@ -42,7 +42,7 @@ cp -r rules/ ~/.claude/rules/
 cp -r hooks/ ~/.claude/hooks/
 ```
 
-`bin/claudey` is not checked into git -- each machine builds its own binary from source.
+`bin/claudey` is not checked into git — each machine builds its own binary from source via `bash bin/setup.sh`. After the first build, new sessions auto-rebuild whenever `src/` changes (no prompt, streamed to stderr).
 
 ## Documentation
 

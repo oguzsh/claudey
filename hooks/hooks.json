@@ -56,7 +56,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" session-start"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/session-start-guard.sh\" && \"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" session-start"
 					}
 				]
 			}
