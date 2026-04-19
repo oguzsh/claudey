@@ -36,3 +36,7 @@ examples/sessions/*.tmp
 
 # Rust build output
 target/
+
+# Built per-machine via bin/build-hooks.sh
+bin/claudey
+bin/claudey.exe

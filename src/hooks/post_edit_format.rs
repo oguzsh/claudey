@@ -26,10 +26,10 @@ pub fn post_edit_format(input: Value, raw: Vec<u8>) {
 }
 
 pub fn should_format(path: &str) -> bool {
-    matches!(
-        path.rsplit('.').next(),
-        Some("ts") | Some("tsx") | Some("js") | Some("jsx")
-    ) && path.contains('.')
+    path.ends_with(".ts")
+        || path.ends_with(".tsx")
+        || path.ends_with(".js")
+        || path.ends_with(".jsx")
 }
 
 fn absolute(p: &Path) -> std::io::Result<std::path::PathBuf> {

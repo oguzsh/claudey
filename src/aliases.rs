@@ -406,8 +406,7 @@ pub fn list_at(path: &Path, search: Option<&str>, limit: usize) -> Vec<AliasInfo
         if !q.is_empty() {
             let needle = q.to_lowercase();
             aliases.retain(|a| {
-                a.name.to_lowercase().contains(&needle)
-                    || a.title.to_lowercase().contains(&needle)
+                a.name.to_lowercase().contains(&needle) || a.title.to_lowercase().contains(&needle)
             });
         }
     }
@@ -583,10 +582,7 @@ mod tests {
     fn test_resolve_session_alias_passthrough() {
         let (_d, p) = tmp_alias_path();
         set_at(&p, "myalias", "/path/to/session", "");
-        assert_eq!(
-            resolve_session_alias_at(&p, "myalias"),
-            "/path/to/session"
-        );
+        assert_eq!(resolve_session_alias_at(&p, "myalias"), "/path/to/session");
         assert_eq!(resolve_session_alias_at(&p, "notanalias"), "notanalias");
     }
 

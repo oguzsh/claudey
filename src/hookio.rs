@@ -18,7 +18,11 @@ pub const DEFAULT_MAX_SIZE: usize = 1024 * 1024; // 1 MB
 /// On timeout, read error, or parse error, returns an empty object and
 /// (where available) the raw bytes that were read.  Never panics.
 pub fn read_stdin_json(timeout: Duration, max_size: usize) -> (Value, Vec<u8>) {
-    let max = if max_size == 0 { DEFAULT_MAX_SIZE } else { max_size };
+    let max = if max_size == 0 {
+        DEFAULT_MAX_SIZE
+    } else {
+        max_size
+    };
 
     let (tx, rx) = mpsc::channel::<Vec<u8>>();
     // NOTE: the reader thread is intentionally detached. This hook binary is
@@ -79,7 +83,7 @@ pub fn passthrough(data: &[u8]) {
 // ── field accessors ────────────────────────────────────────────────────────
 
 /// Extract the `tool_input` object from a parsed hook JSON value.
-pub fn get_tool_input<'a>(v: &'a Value) -> Option<&'a serde_json::Map<String, Value>> {
+pub fn get_tool_input(v: &Value) -> Option<&serde_json::Map<String, Value>> {
     v.get("tool_input").and_then(|t| t.as_object())
 }
 
@@ -92,7 +96,7 @@ pub fn get_tool_input_string<'a>(v: &'a Value, field: &str) -> &'a str {
 }
 
 /// Extract the `tool_output` object from a parsed hook JSON value.
-pub fn get_tool_output<'a>(v: &'a Value) -> Option<&'a serde_json::Map<String, Value>> {
+pub fn get_tool_output(v: &Value) -> Option<&serde_json::Map<String, Value>> {
     v.get("tool_output").and_then(|t| t.as_object())
 }
 

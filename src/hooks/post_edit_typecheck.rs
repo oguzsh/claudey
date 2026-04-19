@@ -75,7 +75,7 @@ pub fn post_edit_typecheck(input: Value, raw: Vec<u8>) {
 }
 
 pub fn is_typescript(path: &str) -> bool {
-    matches!(path.rsplit('.').next(), Some("ts") | Some("tsx")) && path.contains('.')
+    path.ends_with(".ts") || path.ends_with(".tsx")
 }
 
 pub fn find_tsconfig_dir(start: &Path) -> Option<PathBuf> {

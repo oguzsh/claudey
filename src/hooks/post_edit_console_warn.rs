@@ -27,10 +27,10 @@ pub fn post_edit_console_warn(input: Value, raw: Vec<u8>) {
 }
 
 pub fn is_jsts(path: &str) -> bool {
-    matches!(
-        path.rsplit('.').next(),
-        Some("ts") | Some("tsx") | Some("js") | Some("jsx")
-    ) && path.contains('.')
+    path.ends_with(".ts")
+        || path.ends_with(".tsx")
+        || path.ends_with(".js")
+        || path.ends_with(".jsx")
 }
 
 pub fn scan_for_console_log(path: &Path) -> Option<Vec<String>> {
