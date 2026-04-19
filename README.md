@@ -13,7 +13,7 @@ Claudey is a Claude Code plugin that gives your coding sessions a complete devel
 - **18 rule files** -- always-on guidelines for coding style, security, git workflow, and testing
 - **Event-driven hooks** -- auto-format on edit, session persistence, console.log detection, compaction hints
 - **Session persistence** -- automatic state save/restore across conversations
-- **Go binary backend** -- compiled hook runner, package manager detection, session management
+- **Rust binary backend** -- compiled hook runner and session management
 
 ## Quick Start
 
@@ -36,13 +36,16 @@ Then try your first command:
 /plugin install claudey@oguzsh/claudey
 ```
 
-This installs everything: agents, skills, commands, hooks, rules, and the Go binary.
+This installs everything: agents, skills, commands, hooks, rules, and the Rust binary.
 
 ### Manual Copy
 
 ```bash
 git clone https://github.com/oguzsh/claudey.git
 cd claudey
+
+# Build the hook binary for your machine (requires Rust toolchain)
+bash bin/build-hooks.sh
 
 # Copy what you need to ~/.claude/
 cp -r skills/ ~/.claude/skills/
@@ -51,16 +54,16 @@ cp -r rules/ ~/.claude/rules/
 cp -r hooks/ ~/.claude/hooks/
 ```
 
+`bin/claudey` is not checked into git -- each machine builds its own binary from source.
+
 ## Architecture
 
 ```
 claudey/
-├── bin/             # Build and test scripts
+├── bin/             # Build/test scripts; `claudey` binary built here (gitignored)
 ├── commands/        # 29 slash commands (Markdown)
 ├── contexts/        # Context modes: dev, research, review
-├── hooks/           # Event-driven hooks (JSON config + Go handlers)
-│   └── bin/         # Compiled hook binary (claudey-hooks)
-├── internal/        # Go source: hooks, session, package manager, git, etc.
+├── hooks/           # Event-driven hooks (hooks.json + Rust dispatcher)
 ├── mcp-configs/     # MCP server presets
 ├── rules/           # 18 always-on rule files
 │   ├── common/      #   Language-agnostic (security, testing, git, etc.)
@@ -69,12 +72,14 @@ claudey/
 ├── schemas/         # JSON schemas for hooks, plugins, package manager config
 ├── scripts/         # Cross-platform utilities
 ├── skills/          # 24 workflow skills (Markdown)
+├── src/             # Rust source for the claudey binary
+├── tests/           # Integration tests
+├── Cargo.toml       # Rust crate definition
 ├── install.sh       # Rules installer (Claude + Cursor targets)
-├── go.mod           # Go module definition
 └── CLAUDE.md        # Project instructions for Claude Code
 ```
 
-**Two-layer architecture:** Markdown/JSON configuration files define what agents, skills, commands, and rules do. A compiled Go binary (`bin/claudey`) handles the runtime -- hook execution, session management, package manager detection, and file operations.
+**Two-layer architecture:** Markdown/JSON configuration files define what agents, skills, commands, and rules do. A compiled Rust binary (`bin/claudey`) handles the runtime -- hook execution and session management.
 
 ## Components Reference
 
