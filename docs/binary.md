@@ -62,3 +62,14 @@ If all three fail, the current directory is returned as a last-resort default.
 - **Output**: stdout passes the raw input through unchanged unless the hook explicitly writes a replacement.
 - **Logs**: go to stderr, typically with a `[Hook] ` prefix. These are the messages the user sees during a Claude Code session.
 - **Exit code**: `0` means "continue normally". A non-zero code (e.g. `block-random-docs` returns `2`) signals to Claude Code that the tool call should be blocked.
+
+## First-Run Setup
+
+The plugin ships as Rust source, not a prebuilt binary, so `bin/claudey` has to be built per-machine. Two shell scripts mediate this:
+
+- **`bin/setup.sh`** — run manually in your terminal after installing the plugin. If `cargo` is missing, prompts to install Rust via `rustup` (one-line Y/n). Then delegates to `bin/build-hooks.sh` to build and install the binary. Run once per machine.
+- **`bin/session-start-guard.sh`** — invoked automatically at the start of every Claude Code session, wrapped around `bin/claudey session-start` in `hooks/hooks.json`. If the binary is missing, prints a one-line nudge to run `bin/setup.sh` and exits (the SessionStart hook fails visibly; Claude itself keeps running). If the binary exists but `src/` / `Cargo.toml` / `Cargo.lock` are newer, silently rebuilds via `bin/build-hooks.sh` and streams cargo's output to stderr.
+
+The binary's own existence is the "setup done" marker — no separate flag file. Manual rebuilds still work: `bash bin/build-hooks.sh` any time.
+
+**Platform support:** macOS and Linux/WSL. Windows native is not supported.
