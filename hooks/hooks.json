@@ -114,7 +114,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "afplay /System/Library/Sounds/Glass.aiff"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/notification.sh\""
 					}
 				]
 			}
@@ -129,7 +129,7 @@
 					},
 					{
 						"type": "command",
-						"command": "afplay /System/Library/Sounds/Hero.aiff"
+						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/notification.sh\""
 					}
 				]
 			}
