@@ -1,24 +1,12 @@
 {
 	"name": "claudey",
 	"version": "2.1.1",
-	"description": "Claudey is a collection of agents, skills, hooks, commands, and rules for Claude Code.",
+	"description": "Claudey is a collection of skills, hooks, commands, and rules for Claude Code.",
 	"author": {
 		"name": "Oguzhan Ince"
 	},
 	"homepage": "https://github.com/oguzsh/claudey",
 	"repository": "https://github.com/oguzsh/claudey",
 	"license": "MIT",
-	"skills": ["./skills/", "./commands/"],
-	"agents": [
-		"./agents/architect.md",
-		"./agents/build-error-resolver.md",
-		"./agents/code-reviewer.md",
-		"./agents/database-reviewer.md",
-		"./agents/doc-updater.md",
-		"./agents/planner.md",
-		"./agents/python-reviewer.md",
-		"./agents/refactor-cleaner.md",
-		"./agents/security-reviewer.md",
-		"./agents/tdd-guide.md"
-	]
+	"skills": ["./skills/", "./commands/"]
 }
