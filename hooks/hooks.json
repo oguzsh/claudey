@@ -12,15 +12,6 @@
 				]
 			},
 			{
-				"matcher": "Write",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "\"${CLAUDE_PLUGIN_ROOT}/bin/claudey\" block-random-docs"
-					}
-				]
-			},
-			{
 				"matcher": "Edit|Write",
 				"hooks": [
 					{
